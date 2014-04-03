@@ -9,15 +9,19 @@ var expect = chai.expect;
 describe("loop.shared.Client", function() {
   "use strict";
 
-  var sandbox, fakeXHR, requests = [], callback,
-      fakeErrorRes = JSON.stringify({
-        "status": "errors",
-        "errors": [{
-           "location": "url",
-           "name": "token",
-           "description": "invalid token"
-        }]
-      });
+  var sandbox,
+      fakeXHR,
+      requests = [],
+      callback;
+
+  var fakeErrorRes = JSON.stringify({
+      status: "errors",
+      errors: [{
+        location: "url",
+        name: "token",
+        description: "invalid token"
+      }]
+    });
 
   beforeEach(function() {
     sandbox = sinon.sandbox.create();
