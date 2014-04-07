@@ -43,6 +43,13 @@ loop.webapp = (function($, OT, webl10n) {
   });
 
   /**
+   * Unsupported view - for browsers we don't support.
+   */
+  var UnsupportedView = sharedViews.BaseView.extend({
+    el: "#unsupported"
+  });
+
+  /**
    * Conversation launcher view. A ConversationModel is associated and attached
    * as a `model` property.
    */
@@ -126,6 +133,7 @@ loop.webapp = (function($, OT, webl10n) {
 
     routes: {
       "": "home",
+      "unsupported": "unsupported",
       "call/ongoing": "conversation",
       "call/:token": "initiate"
     },
@@ -170,6 +178,10 @@ loop.webapp = (function($, OT, webl10n) {
       this.loadView(new HomeView());
     },
 
+    unsupported: function() {
+      this.loadView(new UnsupportedView());
+    },
+
     /**
      * Loads conversation launcher view, setting the received conversation token
      * to the current conversation model.
@@ -177,6 +189,11 @@ loop.webapp = (function($, OT, webl10n) {
      * @param  {String} loopToken Loop conversation token.
      */
     initiate: function(loopToken) {
+      if (!TB.checkSystemRequirements()) {
+        this.navigate("unsupported", {trigger: true});
+        return;
+      }
+
       this._conversation.set("loopToken", loopToken);
       this.loadView(new ConversationFormView({
         model: this._conversation,

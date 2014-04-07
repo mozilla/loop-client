@@ -23,10 +23,16 @@
       <p data-l10n-id="welcome">Welcome to the Loop web client.</p>
     </div>
 
-    <!-- The autocomplete attribute is set to "off" to prevent keeping the state
+   <div id="unsupported" class="hide">
+      <h2>Incompatible Browser</h2>
+      <p data-l10n-id="">The audio and video components of Loop are powered by WebRTC.</p>
+      <p>To enable this functionality, please use the latest version of <a href="http://www.mozilla.org/firefox/">Firefox</a>.</p>
+    </div>
+
+   <!-- The autocomplete attribute is set to "off" to prevent keeping the state
          of the disabled button across reloads  -->
     <form id="conversation-form" autocomplete="off" class="hide">
-      <p>
+     <p>
         <button class="btn btn-success" data-l10n-id="start_call">Start call</button>
       </p>
     </form>
