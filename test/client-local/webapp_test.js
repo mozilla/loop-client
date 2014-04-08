@@ -105,7 +105,7 @@ describe("loop.webapp", function() {
 
         it("should navigate to the unsupported route if the sdk detects " +
           "the browser is unsupported", function() {
-            sandbox.stub(window.TB, "checkSystemRequirements").returns(false);
+            sandbox.stub(window.OT, "checkSystemRequirements").returns(false);
             sandbox.stub(router, "navigate");
 
             router.initiate("fakeToken");
@@ -132,7 +132,7 @@ describe("loop.webapp", function() {
 
         it("should navigate to the unsupported route if the sdk detects " +
           "the browser is unsupported", function() {
-            sandbox.stub(window.TB, "checkSystemRequirements").returns(false);
+            sandbox.stub(window.OT, "checkSystemRequirements").returns(false);
             sandbox.stub(router, "navigate");
 
             router.conversation();

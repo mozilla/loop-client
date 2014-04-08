@@ -53,10 +53,10 @@ loop.webapp = (function($, OT, webl10n) {
       // support spaces at the ends of strings. Hence we add quotes in the
       // translation, and remove them manually here.
       function stripQuotes(text) {
-        if (text[0] == '"')
+        if (text[0] === '"')
           text = text.substring(1);
 
-        if (text[text.length - 1] == '"')
+        if (text[text.length - 1] === '"')
           text = text.substring(0, text.length - 1);
 
         return text;
@@ -212,7 +212,7 @@ loop.webapp = (function($, OT, webl10n) {
      * @param  {String} loopToken Loop conversation token.
      */
     initiate: function(loopToken) {
-      if (!TB.checkSystemRequirements()) {
+      if (!OT.checkSystemRequirements()) {
         this.navigate("unsupported", {trigger: true});
         return;
       }
@@ -229,7 +229,7 @@ loop.webapp = (function($, OT, webl10n) {
      *
      */
     conversation: function() {
-      if (!TB.checkSystemRequirements()) {
+      if (!OT.checkSystemRequirements()) {
         this.navigate("unsupported", {trigger: true});
         return;
       }
