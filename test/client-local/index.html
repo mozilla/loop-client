@@ -29,11 +29,16 @@
     chai.Assertion.includeStack = true;
     mocha.setup('bdd');
   </script>
+
+  <!-- Test helpers -->
+  <script src="../shared/sdk_mock.js"></script>
+
   <!-- App scripts -->
   <script src="../../content/shared/js/models.js"></script>
   <script src="../../content/shared/js/views.js"></script>
   <script src="../../content/shared/js/router.js"></script>
   <script src="../../content/js/webapp.js"></script>
+
   <!-- Test scripts -->
   <script src="webapp_test.js"></script>
   <script>

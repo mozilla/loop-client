@@ -81,6 +81,16 @@ describe("loop.webapp", function() {
         });
       });
 
+      describe("#unsupported", function() {
+        it("should load the UnsupportedView", function() {
+          router.unsupported();
+
+          sinon.assert.calledOnce(router.loadView);
+          sinon.assert.calledWithMatch(router.loadView,
+                                       {$el: {selector: "#unsupported"}});
+        });
+      });
+
       describe("#initiate", function() {
         it("should load the ConversationFormView and set the token",
           function() {
@@ -91,6 +101,18 @@ describe("loop.webapp", function() {
               $el: {selector: "#conversation-form"},
               model: {attributes: {loopToken: "fakeToken"}}
             });
+          });
+
+        it("should navigate to the unsupported route if the sdk detects " +
+          "the browser is unsupported", function() {
+            sandbox.stub(window.TB, "checkSystemRequirements").returns(false);
+            sandbox.stub(router, "navigate");
+
+            router.initiate("fakeToken");
+
+            sinon.assert.calledOnce(router.navigate);
+            sinon.assert.calledWithExactly(router.navigate,
+              "unsupported", {trigger:true});
           });
       });
 
@@ -107,6 +129,18 @@ describe("loop.webapp", function() {
             $el: {selector: "#conversation"}
           });
         });
+
+        it("should navigate to the unsupported route if the sdk detects " +
+          "the browser is unsupported", function() {
+            sandbox.stub(window.TB, "checkSystemRequirements").returns(false);
+            sandbox.stub(router, "navigate");
+
+            router.conversation();
+
+            sinon.assert.calledOnce(router.navigate);
+            sinon.assert.calledWithExactly(router.navigate,
+              "unsupported", {trigger:true});
+          });
 
         it("should redirect to #call/{token} if session isn't ready",
           function() {

@@ -46,7 +46,30 @@ loop.webapp = (function($, OT, webl10n) {
    * Unsupported view - for browsers we don't support.
    */
   var UnsupportedView = sharedViews.BaseView.extend({
-    el: "#unsupported"
+    el: "#unsupported",
+
+    render: function() {
+      // XXX This is working around the fact that webl10n doesn't currently
+      // support spaces at the ends of strings. Hence we add quotes in the
+      // translation, and remove them manually here.
+      function stripQuotes(text) {
+        if (text[0] == '"')
+          text = text.substring(1);
+
+        if (text[text.length - 1] == '"')
+          text = text.substring(0, text.length - 1);
+
+        return text;
+      }
+
+      var translated = stripQuotes(__("use_latest_firefox_pre_link"));
+      this.$("#use_latest_firefox_pre_link").text(translated);
+
+      translated = stripQuotes(__("use_latest_firefox_post_link"));
+      this.$("#use_latest_firefox_post_link").text(translated);
+
+      return this;
+    }
   });
 
   /**
@@ -206,18 +229,27 @@ loop.webapp = (function($, OT, webl10n) {
      *
      */
     conversation: function() {
+      if (!TB.checkSystemRequirements()) {
+        this.navigate("unsupported", {trigger: true});
+        return;
+      }
+
       if (!this._conversation.isSessionReady()) {
         var loopToken = this._conversation.get("loopToken");
         if (loopToken) {
-          return this.navigate("call/" + loopToken, {trigger: true});
-        } else {
-          this._notifier.notify({
-            message: __("Missing conversation information"),
-            level: "error"
-          });
-          return this.navigate("home", {trigger: true});
+          this.navigate("call/" + loopToken, {trigger: true});
+          return;
         }
+
+        this._notifier.notify({
+          message: __("Missing conversation information"),
+          level: "error"
+        });
+
+        this.navigate("home", {trigger: true});
+        return;
       }
+
       this.loadView(new sharedViews.ConversationView({
         sdk: OT,
         model: this._conversation
