@@ -262,11 +262,14 @@ loop.webapp = (function($, OT, webl10n) {
    */
   function init() {
     conversation = new sharedModels.ConversationModel();
-    router = new WebappRouter({
-      conversation: conversation,
-      notifier: new sharedViews.NotificationListView({el: "#messages"})
+
+    webl10n.ready(function() {
+      router = new WebappRouter({
+        conversation: conversation,
+        notifier: new sharedViews.NotificationListView({el: "#messages"})
+      });
+      Backbone.history.start();
     });
-    Backbone.history.start();
   }
 
   return {
