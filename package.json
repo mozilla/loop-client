@@ -2,6 +2,7 @@
   "name": "Loop-client",
   "description": "Video conferencing app powered by WebRTC.",
   "version": "0.0.1",
+  "author": "Mozilla (https://mozilla.org/)",
   "engines": {
     "node": "0.10.x",
     "npm":"1.3.x"
@@ -15,5 +16,13 @@
   "scripts": {
     "test": "make test",
     "start": "make runserver"
-  }
+  },
+  "keywords": ["webrtc"],
+  "license": "MPL-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mozilla/loop-client.git"
+  },
+  "bugs": "https://bugzilla.mozilla.org/enter_bug.cgi?product=Loop&component=Client",
+  "homepage": "https://github.com/mozilla/loop-client/"
 }
