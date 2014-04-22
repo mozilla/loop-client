@@ -9,10 +9,17 @@ var expect = chai.expect;
 describe("loop.shared.router", function() {
   "use strict";
 
-  var sandbox;
+  var sandbox, notifier;
 
   beforeEach(function() {
     sandbox = sinon.sandbox.create();
+    notifier = {
+      notify: sandbox.spy(),
+      warn: sandbox.spy(),
+      warnL10n: sandbox.spy(),
+      error: sandbox.spy(),
+      errorL10n: sandbox.spy()
+    };
   });
 
   afterEach(function() {
@@ -20,46 +27,60 @@ describe("loop.shared.router", function() {
   });
 
   describe("BaseRouter", function() {
-    var router, view;
-
     beforeEach(function() {
-      router = new loop.shared.router.BaseRouter();
       $("#fixtures").html('<div id="main"></div>');
-      var TestView = loop.shared.views.BaseView.extend({
-        template: _.template("<p>plop</p>")
-      });
-      view = new TestView();
     });
 
     afterEach(function() {
       $("#fixtures").empty();
     });
 
-    describe("#loadView", function() {
-      it("should set the active view", function() {
-        router.loadView(view);
-
-        expect(router.activeView).eql(view);
-      });
-
-      it("should load and render the passed view", function() {
-        router.loadView(view);
-
-        expect($("#main p").text()).eql("plop");
+    describe("#constructor", function() {
+      it("should require a notifier", function() {
+        expect(function() {
+          new loop.shared.router.BaseRouter();
+        }).to.Throw(Error, /missing required notifier/);
       });
     });
 
-    describe("#updateView", function() {
-      it("should update the main element with provided contents", function() {
-        router.updateView($("<p>plip</p>"));
+    describe("constructed", function() {
+      var router, view, TestRouter;
 
-        expect($("#main p").text()).eql("plip");
+      beforeEach(function() {
+        TestRouter = loop.shared.router.BaseRouter.extend({});
+        var TestView = loop.shared.views.BaseView.extend({
+          template: _.template("<p>plop</p>")
+        });
+        view = new TestView();
+        router = new TestRouter({notifier: notifier});
+      });
+
+      describe("#loadView", function() {
+        it("should set the active view", function() {
+          router.loadView(view);
+
+          expect(router._activeView).eql(view);
+        });
+
+        it("should load and render the passed view", function() {
+          router.loadView(view);
+
+          expect($("#main p").text()).eql("plop");
+        });
+      });
+
+      describe("#updateView", function() {
+        it("should update the main element with provided contents", function() {
+          router.updateView($("<p>plip</p>"));
+
+          expect($("#main p").text()).eql("plip");
+        });
       });
     });
   });
 
   describe("BaseConversationRouter", function() {
-    var conversation, notifier, TestRouter;
+    var conversation, TestRouter;
 
     beforeEach(function() {
       TestRouter = loop.shared.router.BaseConversationRouter.extend({
@@ -69,13 +90,6 @@ describe("loop.shared.router", function() {
       conversation = new loop.shared.models.ConversationModel({
         loopToken: "fakeToken"
       }, {sdk: {}});
-      notifier = {
-        notify: sandbox.spy(),
-        warn: sandbox.spy(),
-        warnL10n: sandbox.spy(),
-        error: sandbox.spy(),
-        errorL10n: sandbox.spy()
-      };
     });
 
     describe("#constructor", function() {
@@ -87,8 +101,17 @@ describe("loop.shared.router", function() {
 
       it("should require a notifier", function() {
         expect(function() {
-          new TestRouter({conversation: {}});
+          new TestRouter({conversation: conversation});
         }).to.Throw(Error, /missing required notifier/);
+      });
+
+      it("should expose a notifier", function() {
+        var router = new TestRouter({
+          conversation: conversation,
+          notifier: notifier
+        });
+
+        expect(router._notifier).eql(notifier);
       });
     });
 

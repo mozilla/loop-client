@@ -19,7 +19,9 @@ describe("loop.webapp", function() {
     notifier = {
       notify: sandbox.spy(),
       warn: sandbox.spy(),
-      error: sandbox.spy()
+      warnL10n: sandbox.spy(),
+      error: sandbox.spy(),
+      errorL10n: sandbox.spy(),
     };
   });
 
@@ -51,7 +53,7 @@ describe("loop.webapp", function() {
       it("should notify the user if session token is missing", function() {
         router.startCall();
 
-        sinon.assert.calledOnce(notifier.error);
+        sinon.assert.calledOnce(notifier.errorL10n);
         // XXX test for message contents (needs stubbing L10n)
       });
 
@@ -188,6 +190,12 @@ describe("loop.webapp", function() {
   });
 
   describe("ConversationFormView", function() {
+    var conversation;
+
+    beforeEach(function() {
+      conversation = new sharedModels.ConversationModel({}, {sdk: {}});
+    });
+
     describe("#initialize", function() {
       it("should require a conversation option", function() {
         expect(function() {
@@ -197,7 +205,7 @@ describe("loop.webapp", function() {
 
       it("should require a notifier option", function() {
         expect(function() {
-          new loop.webapp.WebappRouter({conversation: {}});
+          new loop.webapp.WebappRouter({conversation: conversation});
         }).to.Throw(Error, /missing required notifier/);
       });
     });
@@ -258,7 +266,7 @@ describe("loop.webapp", function() {
         // XXX We should test for the actual message content, but webl10n gets
         //     in the way as translated messages are all empty because matching
         //     DOM elements are missing.
-        sinon.assert.calledOnce(notifier.error);
+        sinon.assert.calledOnce(notifier.errorL10n);
       });
     });
   });
