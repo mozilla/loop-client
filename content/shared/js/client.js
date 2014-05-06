@@ -120,18 +120,35 @@ loop.shared.Client = (function($) {
       var endpoint = this.settings.baseServerUrl + "/call-url/",
           reqData  = {callerId: nickname};
 
-      var req = $.post(endpoint, reqData, function(callUrlData) {
-        try {
-          cb(null, this._validate(callUrlData, ["call_url", "expiresAt"]));
+      var req = $.ajax({
+        type: "POST",
+        url: endpoint,
+        data: reqData,
+        xhrFields: {
+          withCredentials: true
+        },
+        crossDomain: true,
+        beforeSend: function(xhr) {
+          var cookies = navigator.mozLoop.getCookies();
+          cookies.forEach(function(cookie) {
+            if (cookie.name == "loop-session")
+              xhr.setRequestHeader("Cookie", cookie.name + "=" + cookie.value);
+          });
+        },
+        success: function(callUrlData) {
+          try {
+            cb(null, this._validate(callUrlData, ["call_url", "expiresAt"]));
 
-          // Store the expiry time, convert from hours to seconds.
-          var expiresHours = this._hoursToSeconds(callUrlData.expiresAt);
-          navigator.mozLoop.noteCallUrlExpiry(expiresHours);
-        } catch (err) {
-          console.log("Error requesting call info", err);
-          cb(err);
-        }
-      }.bind(this), "json");
+            // Store the expiry time, convert from hours to seconds.
+            var expiresHours = this._hoursToSeconds(callUrlData.expiresAt);
+            navigator.mozLoop.noteCallUrlExpiry(expiresHours);
+          } catch (err) {
+            console.log("Error requesting call info", err);
+            cb(err);
+          }
+        }.bind(this),
+        dataType: "json"
+      });
 
       req.fail(this._failureHandler.bind(this, cb));
     },
@@ -181,14 +198,30 @@ loop.shared.Client = (function($) {
       // opens the chat window, but we'll need to decide that once we make a
       // decision on chrome versus content, and know if we're going with
       // LoopService or a frameworker.
-      var req = $.get(endpoint + "?version=" + version, function(callsData) {
+      var req = $.ajax({
+        type: "GET",
+        url: endpoint + "?version=" + version,
+        xhrFields: {
+          withCredentials: true
+        },
+        crossDomain: true,
+        beforeSend: function(xhr) {
+          var cookies = navigator.mozLoop.getCookies();
+          cookies.forEach(function(cookie) {
+            if (cookie.name == "loop-session")
+              xhr.setRequestHeader("Cookie", cookie.name + "=" + cookie.value);
+          });
+        },
+        success: function(callsData) {
         try {
           cb(null, this._validate(callsData, ["calls"]));
         } catch (err) {
           console.log("Error requesting calls info", err);
           cb(err);
         }
-      }.bind(this), "json");
+      }.bind(this),
+        dataType: "json"
+      });
 
       req.fail(this._failureHandler.bind(this, cb));
     },
