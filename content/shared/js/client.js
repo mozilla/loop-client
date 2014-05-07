@@ -20,6 +20,13 @@ loop.shared.Client = (function($) {
         !settings.baseServerUrl) {
       throw new Error("missing required baseServerUrl");
     }
+
+    if ("mozLoop" in settings) {
+      this.mozLoop = settings.mozLoop;
+    } else {
+      this.mozLoop = navigator.mozLoop;
+    }
+
     this.settings = settings;
   }
 
@@ -98,7 +105,7 @@ loop.shared.Client = (function($) {
      * @param {Function} cb Callback(err)
      */
     _ensureRegistered: function(cb) {
-      navigator.mozLoop.ensureRegistered(function(err) {
+      this.mozLoop.ensureRegistered(function(err) {
         cb(err);
       }.bind(this));
     },
@@ -129,19 +136,19 @@ loop.shared.Client = (function($) {
         },
         crossDomain: true,
         beforeSend: function(xhr) {
-          var cookies = navigator.mozLoop.getCookies();
+          var cookies = this.mozLoop.getCookies();
           cookies.forEach(function(cookie) {
             if (cookie.name === "loop-session")
               xhr.setRequestHeader("Cookie", cookie.name + "=" + cookie.value);
           });
-        },
+        }.bind(this),
         success: function(callUrlData) {
           try {
             cb(null, this._validate(callUrlData, ["call_url", "expiresAt"]));
 
             // Store the expiry time, convert from hours to seconds.
             var expiresHours = this._hoursToSeconds(callUrlData.expiresAt);
-            navigator.mozLoop.noteCallUrlExpiry(expiresHours);
+            this.mozLoop.noteCallUrlExpiry(expiresHours);
           } catch (err) {
             console.log("Error requesting call info", err);
             cb(err);
@@ -206,12 +213,12 @@ loop.shared.Client = (function($) {
         },
         crossDomain: true,
         beforeSend: function(xhr) {
-          var cookies = navigator.mozLoop.getCookies();
+          var cookies = this.mozLoop.getCookies();
           cookies.forEach(function(cookie) {
             if (cookie.name === "loop-session")
               xhr.setRequestHeader("Cookie", cookie.name + "=" + cookie.value);
           });
-        },
+        }.bind(this),
         success: function(callsData) {
           try {
             cb(null, this._validate(callsData, ["calls"]));

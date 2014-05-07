@@ -12,7 +12,8 @@ describe("loop.shared.Client", function() {
   var sandbox,
       fakeXHR,
       requests = [],
-      callback;
+      callback,
+      mozLoop;
 
   var fakeErrorRes = JSON.stringify({
       status: "errors",
@@ -32,6 +33,8 @@ describe("loop.shared.Client", function() {
       requests.push(xhr);
     };
     callback = sinon.spy();
+//    mozLoop = { getCookies: sinon.stub().returns(new Array()) };
+    mozLoop = undefined;
   });
 
   afterEach(function() {
@@ -51,12 +54,12 @@ describe("loop.shared.Client", function() {
       var client;
 
       beforeEach(function() {
-        window.navigator.mozLoop = {
+        mozLoop = {
           ensureRegistered: sinon.stub().callsArgWith(0, null),
           noteCallUrlExpiry: sinon.spy()
         };
         client = new loop.shared.Client(
-          {baseServerUrl: "http://fake.api"}
+          {baseServerUrl: "http://fake.api", mozLoop: mozLoop}
         );
       });
 
@@ -67,11 +70,11 @@ describe("loop.shared.Client", function() {
       it("should ensure loop is registered", function() {
         client.requestCallUrl("foo", callback);
 
-        sinon.assert.calledOnce(navigator.mozLoop.ensureRegistered);
+        sinon.assert.calledOnce(mozLoop.ensureRegistered);
       });
 
       it("should send an error when registration fails", function() {
-        navigator.mozLoop.ensureRegistered.callsArgWith(0, "offline");
+        mozLoop.ensureRegistered.callsArgWith(0, "offline");
 
         client.requestCallUrl("foo", callback);
 
@@ -119,7 +122,7 @@ describe("loop.shared.Client", function() {
                             JSON.stringify(callUrlData));
 
         // expiresAt is in hours, and noteCallUrlExpiry wants seconds.
-        sinon.assert.calledWithExactly(navigator.mozLoop.noteCallUrlExpiry,
+        sinon.assert.calledWithExactly(mozLoop.noteCallUrlExpiry,
           60 * 60 * 60);
       });
 
@@ -150,7 +153,9 @@ describe("loop.shared.Client", function() {
       var client;
 
       beforeEach(function() {
-        client = new loop.shared.Client({baseServerUrl: "http://fake.api"});
+        client = new loop.shared.Client(
+          {baseServerUrl: "http://fake.api", mozLoop: mozLoop}
+        );
       });
 
       it("should prevent launching a conversation when version is missing",
@@ -197,7 +202,9 @@ describe("loop.shared.Client", function() {
       var client;
 
       beforeEach(function() {
-        client = new loop.shared.Client({baseServerUrl: "http://fake.api"});
+        client = new loop.shared.Client(
+          {baseServerUrl: "http://fake.api", mozLoop: mozLoop}
+        );
       });
 
       it("should prevent launching a conversation when token is missing",
