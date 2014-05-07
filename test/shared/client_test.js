@@ -33,6 +33,8 @@ describe("loop.shared.Client", function() {
       requests.push(xhr);
     };
     callback = sinon.spy();
+// XXXdmose we need to factor out _post and _get and test them separately
+// so that we aren't testing cookies in every test
 //    mozLoop = { getCookies: sinon.stub().returns(new Array()) };
     mozLoop = undefined;
   });
