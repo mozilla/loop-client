@@ -208,6 +208,10 @@ loop.shared.Client = (function($) {
       }.bind(this));
 
       req.fail(this._failureHandler.bind(this, cb));
+    },
+
+    _post: function(url, data, success, dataType) {
+      return $.post(url, data, success, dataType);
     }
   };
 
