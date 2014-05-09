@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-/* global loop, sinon */
+/*global loop, sinon, it, beforeEach, afterEach, describe */
 
 var expect = chai.expect;
 
@@ -35,8 +35,8 @@ describe("loop.shared.Client", function() {
     callback = sinon.spy();
 // XXXdmose we need to factor out _post and _get and test them separately
 // so that we aren't testing cookies in every test
-//    mozLoop = { getCookies: sinon.stub().returns(new Array()) };
-    mozLoop = undefined;
+    mozLoop = { getCookies: sinon.stub().returns([]) };
+//    mozLoop = undefined;
   });
 
   afterEach(function() {
@@ -257,6 +257,95 @@ describe("loop.shared.Client", function() {
           return /Invalid data received/.test(err.message);
         }));
       });
+    });
+
+    describe("#_post", function () {
+      var client, fakeUrl, fakeData, fakeDataType, fakeCallback;
+
+      beforeEach(function() {
+        fakeUrl = "http://example.com";
+        fakeData = { fake: 'monkey' };
+        fakeDataType = "json";
+        fakeCallback = function() {};
+        document.cookie = "animal=cat; domain=example.com";
+      });
+
+      afterEach(function() {
+        document.cookie =
+          "animal=; domain=example.com; expires=Thu, 01 Jan 1970 00:00:01 GMT";
+      });
+
+      it("should make a single POST of the data to the URL",
+        function() {
+          client = new loop.shared.Client(
+            {baseServerUrl: "http://fake.api", mozLoop: mozLoop}
+          );
+
+          client._post(fakeUrl, fakeData, fakeCallback, fakeDataType);
+
+          expect(requests).to.have.length.of(1);
+          expect(requests[0].method).to.equal("POST");
+          expect(requests[0].url).to.equal(fakeUrl);
+          expect(requests[0].requestBody).to.equal("fake=monkey");
+        });
+
+      it("should call back appropriate args", function() {
+        client = new loop.shared.Client(
+          {baseServerUrl: "http://fake.api", mozLoop: mozLoop}
+        );
+
+        var fakeHTTPStatus = 200;
+        function verifySuccess(data, textStatus) {
+          expect(data).to.deep.equal(fakeData);
+          expect(textStatus).to.be.a('string');
+        }
+
+        client._post(fakeUrl, fakeData, verifySuccess, fakeDataType);
+        requests[0].respond(fakeHTTPStatus,
+          {"Content-Type": "application/json"}, JSON.stringify(fakeData));
+
+        // verifySuccess handles the checking
+      });
+
+      it("should return a jqXHR-like object", function() {
+        client = new loop.shared.Client(
+          {baseServerUrl: "http://fake.api", mozLoop: mozLoop}
+        );
+
+        var retval = client._post(fakeUrl, fakeData, fakeCallback,
+          fakeDataType);
+
+        // duck-type to see if this looks jqXhr-like
+        expect(retval).to.be.instanceOf(Object);
+        expect(retval).to.have.property('readyState');
+        expect(retval).to.have.property('done');
+        expect(retval).to.have.property('fail');
+        expect(retval).to.have.property('always');
+      });
+
+
+      it.skip("should not explicitly add cookies if mozLoop is undefined", function() {
+        client = new loop.shared.Client(
+          {baseServerUrl: "http://fake.api", mozLoop: undefined}
+        );
+
+        client._post(fakeUrl, fakeData, fakeCallback, fakeDataType);
+
+        console.log("document.cookie = " + document.cookie);
+        console.log("cookie: " + requests[0].requestHeaders.Cookie);
+      });
+
+      it.skip("should include cookies if mozLoop is defined", function() {
+        client = new loop.shared.Client(
+          {baseServerUrl: "http://fake.api", mozLoop: mozLoop}
+        );
+
+        client._post(fakeUrl, fakeData, fakeCallback, fakeDataType);
+
+        console.log("document.cookie = " + document.cookie);
+        console.log("cookie: " + requests[0].requestHeaders.Cookie);
+      });
+
     });
   });
 });
