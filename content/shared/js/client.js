@@ -28,6 +28,8 @@ loop.shared.Client = (function($) {
     }
 
     this.settings = settings;
+
+    this._boundOnBeforeSend = this._onBeforeSend.bind(this);
   }
 
   Client.prototype = {
@@ -135,13 +137,7 @@ loop.shared.Client = (function($) {
           withCredentials: true
         },
         crossDomain: true,
-        beforeSend: function(xhr) {
-          var cookies = this.mozLoop.getCookies();
-          cookies.forEach(function(cookie) {
-            if (cookie.name === "loop-session")
-              xhr.setRequestHeader("Cookie", cookie.name + "=" + cookie.value);
-          });
-        }.bind(this),
+        beforeSend:  this._boundOnBeforeSend,
         success: function(callUrlData) {
           try {
             cb(null, this._validate(callUrlData, ["call_url", "expiresAt"]));
@@ -212,13 +208,7 @@ loop.shared.Client = (function($) {
           withCredentials: true
         },
         crossDomain: true,
-        beforeSend: function(xhr) {
-          var cookies = this.mozLoop.getCookies();
-          cookies.forEach(function(cookie) {
-            if (cookie.name === "loop-session")
-              xhr.setRequestHeader("Cookie", cookie.name + "=" + cookie.value);
-          });
-        }.bind(this),
+        beforeSend: this._boundOnBeforeSend,
         success: function(callsData) {
           try {
             cb(null, this._validate(callsData, ["calls"]));
@@ -267,8 +257,16 @@ loop.shared.Client = (function($) {
       req.fail(this._failureHandler.bind(this, cb));
     },
 
-    _post: function(url, data, success, dataType) {
-      return $.post(url, data, success, dataType);
+    _onBeforeSend: function(xhr) {
+      if (!this.mozLoop) {
+        return;
+      }
+
+      var cookies = this.mozLoop.getCookies();
+      cookies.forEach(function(cookie) {
+        if (cookie.name === "loop-session")
+          xhr.setRequestHeader("Cookie", cookie.name + "=" + cookie.value);
+      });
     }
   };
 

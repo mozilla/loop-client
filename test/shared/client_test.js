@@ -33,10 +33,7 @@ describe("loop.shared.Client", function() {
       requests.push(xhr);
     };
     callback = sinon.spy();
-// XXXdmose we need to factor out _post and _get and test them separately
-// so that we aren't testing cookies in every test
-    mozLoop = { getCookies: sinon.stub().returns([]) };
-//    mozLoop = undefined;
+    mozLoop = undefined;
   });
 
   afterEach(function() {
@@ -63,6 +60,7 @@ describe("loop.shared.Client", function() {
         client = new loop.shared.Client(
           {baseServerUrl: "http://fake.api", mozLoop: mozLoop}
         );
+        sandbox.stub(client, "_boundOnBeforeSend");
       });
 
       afterEach(function() {
@@ -91,7 +89,13 @@ describe("loop.shared.Client", function() {
         expect(requests[0].method).to.be.equal("POST");
         expect(requests[0].url).to.be.equal("http://fake.api/call-url/");
         expect(requests[0].requestBody).to.be.equal('callerId=foo');
+      });
 
+      it("should call this._boundOnBeforeSend", function () {
+
+        client.requestCallUrl("fake", callback);
+
+        sinon.assert.calledOnce(client._boundOnBeforeSend);
       });
 
       it("should request a call url", function() {
@@ -158,6 +162,7 @@ describe("loop.shared.Client", function() {
         client = new loop.shared.Client(
           {baseServerUrl: "http://fake.api", mozLoop: mozLoop}
         );
+        sandbox.stub(client, "_boundOnBeforeSend");
       });
 
       it("should prevent launching a conversation when version is missing",
@@ -166,6 +171,13 @@ describe("loop.shared.Client", function() {
             client.requestCallsInfo();
           }).to.Throw(Error, /missing required parameter version/);
         });
+
+      it("should call this._boundOnBeforeSend", function () {
+
+        client.requestCallsInfo("fake", callback);
+
+        sinon.assert.calledOnce(client._boundOnBeforeSend);
+      });
 
       it("should request data for all calls", function() {
         client.requestCallsInfo(42, callback);
@@ -249,7 +261,7 @@ describe("loop.shared.Client", function() {
       });
 
       it("should send an error if the data is not valid", function() {
-        client.requestCallsInfo("fake", callback);
+        client.requestCallInfo("fake", callback);
 
         requests[0].respond(200, {"Content-Type": "application/json"},
                             '{"bad": "one"}');
@@ -259,93 +271,45 @@ describe("loop.shared.Client", function() {
       });
     });
 
-    describe("#_post", function () {
-      var client, fakeUrl, fakeData, fakeDataType, fakeCallback;
+    describe("_onBeforeSend", function() {
+      var client,
+          dummyXHR;
 
-      beforeEach(function() {
-        fakeUrl = "http://example.com";
-        fakeData = { fake: 'monkey' };
-        fakeDataType = "json";
-        fakeCallback = function() {};
-        document.cookie = "animal=cat; domain=example.com";
+      beforeEach(function () {
+        dummyXHR = { setRequestHeader: sinon.stub() };
       });
 
-      afterEach(function() {
-        document.cookie =
-          "animal=; domain=example.com; expires=Thu, 01 Jan 1970 00:00:01 GMT";
+
+      // XXX review cookie spec, and either make this read cookies and test for
+      // it or stop advertising that we're doing cookies
+      it("should use xhr.setRequestHeader() to pass the 'loop-session'" +
+        " cookie if 'mozLoop' is defined", function() {
+
+        var fakeCookie = { name: "loop-session", value: "fakeSesssion" };
+        mozLoop = { getCookies: sinon.stub().returns([fakeCookie]) };
+        client = new loop.shared.Client(
+          {baseServerUrl: "http://fake.api", mozLoop: mozLoop}
+        );
+
+        client._onBeforeSend(dummyXHR);
+
+        sinon.assert.calledOnce(dummyXHR.setRequestHeader);
+        sinon.assert.calledWithExactly(dummyXHR.setRequestHeader, "Cookie",
+          fakeCookie.name + "=" + fakeCookie.value);
       });
 
-      it("should make a single POST of the data to the URL",
+      it("should not call xhr.setRequestHeader() if mozLoop is undefined",
         function() {
+          mozLoop = undefined;
           client = new loop.shared.Client(
             {baseServerUrl: "http://fake.api", mozLoop: mozLoop}
           );
 
-          client._post(fakeUrl, fakeData, fakeCallback, fakeDataType);
+          client._onBeforeSend(dummyXHR);
 
-          expect(requests).to.have.length.of(1);
-          expect(requests[0].method).to.equal("POST");
-          expect(requests[0].url).to.equal(fakeUrl);
-          expect(requests[0].requestBody).to.equal("fake=monkey");
+          sinon.assert.notCalled(dummyXHR.setRequestHeader);
+
         });
-
-      it("should call back appropriate args", function() {
-        client = new loop.shared.Client(
-          {baseServerUrl: "http://fake.api", mozLoop: mozLoop}
-        );
-
-        var fakeHTTPStatus = 200;
-        function verifySuccess(data, textStatus) {
-          expect(data).to.deep.equal(fakeData);
-          expect(textStatus).to.be.a('string');
-        }
-
-        client._post(fakeUrl, fakeData, verifySuccess, fakeDataType);
-        requests[0].respond(fakeHTTPStatus,
-          {"Content-Type": "application/json"}, JSON.stringify(fakeData));
-
-        // verifySuccess handles the checking
-      });
-
-      it("should return a jqXHR-like object", function() {
-        client = new loop.shared.Client(
-          {baseServerUrl: "http://fake.api", mozLoop: mozLoop}
-        );
-
-        var retval = client._post(fakeUrl, fakeData, fakeCallback,
-          fakeDataType);
-
-        // duck-type to see if this looks jqXhr-like
-        expect(retval).to.be.instanceOf(Object);
-        expect(retval).to.have.property('readyState');
-        expect(retval).to.have.property('done');
-        expect(retval).to.have.property('fail');
-        expect(retval).to.have.property('always');
-      });
-
-
-      it.skip("should not explicitly add cookies if mozLoop is undefined", function() {
-        client = new loop.shared.Client(
-          {baseServerUrl: "http://fake.api", mozLoop: undefined}
-        );
-
-        client._post(fakeUrl, fakeData, fakeCallback, fakeDataType);
-
-        console.log("document.cookie = " + document.cookie);
-        console.log("cookie: " + requests[0].requestHeaders.Cookie);
-      });
-
-      it.skip("should include cookies if mozLoop is defined", function() {
-        client = new loop.shared.Client(
-          {baseServerUrl: "http://fake.api", mozLoop: mozLoop}
-        );
-
-        client._post(fakeUrl, fakeData, fakeCallback, fakeDataType);
-
-        console.log("document.cookie = " + document.cookie);
-        console.log("cookie: " + requests[0].requestHeaders.Cookie);
-      });
-
     });
   });
 });
