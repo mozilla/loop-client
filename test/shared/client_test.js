@@ -239,7 +239,7 @@ describe("loop.shared.Client", function() {
         " cookie if 'mozLoop' is defined", function() {
 
         var fakeCookie = { name: "loop-session", value: "fakeSesssion" };
-        mozLoop = { getCookies: sinon.stub().returns([fakeCookie]) };
+        mozLoop = { get cookies(): sinon.stub().returns([fakeCookie]) };
         client = new loop.shared.Client(
           {baseServerUrl: "http://fake.api", mozLoop: mozLoop}
         );

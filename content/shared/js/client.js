@@ -205,7 +205,7 @@ loop.shared.Client = (function($) {
         return;
       }
 
-      var cookies = this.mozLoop.getCookies();
+      var cookies = this.mozLoop.cookies;
       cookies.forEach(function(cookie) {
         if (cookie.name === "loop-session")
           xhr.setRequestHeader("Cookie", cookie.name + "=" + cookie.value);
