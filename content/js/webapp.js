@@ -40,7 +40,7 @@ loop.webapp = (function($, _, OT) {
    */
   var ConversationFormView = sharedViews.BaseView.extend({
     template: _.template([
-      '<form>',
+      '<form class="conversation-form">',
       '  <p>',
       '    <button class="btn btn-success" data-l10n-id="start_call"></button>',
       '  </p>',

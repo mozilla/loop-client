@@ -2,10 +2,35 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-body {
-  width: 100%;
-  /* prevent the video convsersation elements to occupy the whole available
-     width hence the height while keeping aspect ratio */
-  max-width: 730px;
-  margin: 0 auto;
+.conversation-form {
+  text-align: center;
+}
+
+.conversation-form .btn {
+  position: absolute;
+  top: 45%;
+  width: 10em;
+  margin-left: -5em;
+  height: 2.5em;
+  font-size: 1.4em;
+}
+
+/* Landscape */
+@media screen and (orientation:landscape) {
+  .conversation {
+    max-height: 100vh;
+    overflow: hidden;
+  }
+
+  .conversation .media.nested .remote {
+    width: 100%;
+    max-height: 90vh;
+    overflow: hidden;
+  }
+
+  .conversation .media.nested .remote video {
+    -moz-transform: scale(1.5);
+    transform: scale(1.5);
+    margin-top: -20%;
+  }
 }
