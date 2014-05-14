@@ -28,8 +28,6 @@ loop.shared.Client = (function($) {
     }
 
     this.settings = settings;
-
-    this._boundOnBeforeSend = this._onBeforeSend.bind(this);
   }
 
   Client.prototype = {
@@ -137,7 +135,7 @@ loop.shared.Client = (function($) {
           withCredentials: true
         },
         crossDomain: true,
-        beforeSend:  this._boundOnBeforeSend,
+        beforeSend:  this._onBeforeSend.bind(this),
         success: function(callUrlData) {
           try {
             cb(null, this._validate(callUrlData, ["call_url", "expiresAt"]));
@@ -208,7 +206,7 @@ loop.shared.Client = (function($) {
           withCredentials: true
         },
         crossDomain: true,
-        beforeSend: this._boundOnBeforeSend,
+        beforeSend: this._onBeforeSend.bind(this),
         success: function(callsData) {
           try {
             cb(null, this._validate(callsData, ["calls"]));
@@ -258,6 +256,10 @@ loop.shared.Client = (function($) {
     },
 
     _onBeforeSend: function(xhr) {
+      this._passSessionCookieIfMozLoop(xhr);
+    },
+
+    _passSessionCookieIfMozLoop: function(xhr) {
       if (!this.mozLoop) {
         return;
       }
