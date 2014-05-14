@@ -232,9 +232,6 @@ describe("loop.shared.Client", function() {
         dummyXHR = { setRequestHeader: sinon.stub() };
       });
 
-
-      // XXX review cookie spec, and either make this read cookies and test for
-      // it or stop advertising that we're doing cookies
       it("should use xhr.setRequestHeader() to pass the 'loop-session'" +
         " cookie if 'mozLoop' is defined", function() {
 
