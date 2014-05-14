@@ -259,7 +259,6 @@ describe("loop.shared.Client", function() {
           client._passSessionCookieIfMozLoop(dummyXHR);
 
           sinon.assert.notCalled(dummyXHR.setRequestHeader);
-
         });
     });
   });
