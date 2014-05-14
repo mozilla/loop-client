@@ -56,7 +56,7 @@ describe("loop.shared.Client", function() {
         client = new loop.shared.Client(
           {baseServerUrl: "http://fake.api", mozLoop: mozLoop}
         );
-        sandbox.stub(client, "_boundOnBeforeSend");
+        sandbox.stub(client, "_passSessionCookieIfMozLoop");
       });
 
       it("should post to /call-url/", function() {
@@ -68,11 +68,11 @@ describe("loop.shared.Client", function() {
         expect(requests[0].requestBody).to.be.equal('callerId=foo');
       });
 
-      it("should call this._boundOnBeforeSend", function () {
+      it("should call this._passSessionCookieIfMozLoop", function () {
 
         client.requestCallUrl("fake", callback);
 
-        sinon.assert.calledOnce(client._boundOnBeforeSend);
+        sinon.assert.calledOnce(client._passSessionCookieIfMozLoop);
       });
 
       it("should request a call url", function() {
@@ -115,7 +115,7 @@ describe("loop.shared.Client", function() {
         client = new loop.shared.Client(
           {baseServerUrl: "http://fake.api", mozLoop: mozLoop}
         );
-        sandbox.stub(client, "_boundOnBeforeSend");
+        sandbox.stub(client, "_passSessionCookieIfMozLoop");
       });
 
       it("should prevent launching a conversation when version is missing",
@@ -125,11 +125,11 @@ describe("loop.shared.Client", function() {
           }).to.Throw(Error, /missing required parameter version/);
         });
 
-      it("should call this._boundOnBeforeSend", function () {
+      it("should call this._passSessionCookieIfMozLoop", function () {
 
         client.requestCallsInfo("fake", callback);
 
-        sinon.assert.calledOnce(client._boundOnBeforeSend);
+        sinon.assert.calledOnce(client._passSessionCookieIfMozLoop);
       });
 
       it("should request data for all calls", function() {
@@ -224,7 +224,7 @@ describe("loop.shared.Client", function() {
       });
     });
 
-    describe("_onBeforeSend", function() {
+    describe("_passSessionCookieIfMozLoop", function() {
       var client,
           dummyXHR;
 
@@ -238,13 +238,14 @@ describe("loop.shared.Client", function() {
       it("should use xhr.setRequestHeader() to pass the 'loop-session'" +
         " cookie if 'mozLoop' is defined", function() {
 
-        var fakeCookie = { name: "loop-session", value: "fakeSesssion" };
-        mozLoop = { get cookies(): sinon.stub().returns([fakeCookie]) };
+        var fakeCookie = { name: "loop-session", value: "fakeSession" };
+        mozLoop = {};
+        mozLoop.__defineGetter__("cookies", sinon.stub().returns([fakeCookie]));
         client = new loop.shared.Client(
           {baseServerUrl: "http://fake.api", mozLoop: mozLoop}
         );
 
-        client._onBeforeSend(dummyXHR);
+        client._passSessionCookieIfMozLoop(dummyXHR);
 
         sinon.assert.calledOnce(dummyXHR.setRequestHeader);
         sinon.assert.calledWithExactly(dummyXHR.setRequestHeader, "Cookie",
@@ -258,7 +259,7 @@ describe("loop.shared.Client", function() {
             {baseServerUrl: "http://fake.api", mozLoop: mozLoop}
           );
 
-          client._onBeforeSend(dummyXHR);
+          client._passSessionCookieIfMozLoop(dummyXHR);
 
           sinon.assert.notCalled(dummyXHR.setRequestHeader);
 
