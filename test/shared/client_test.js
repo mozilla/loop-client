@@ -52,7 +52,8 @@ describe("loop.shared.Client", function() {
 
       beforeEach(function() {
         window.navigator.mozLoop = {
-          ensureRegistered: sinon.stub().callsArgWith(0, null)
+          ensureRegistered: sinon.stub().callsArgWith(0, null),
+          noteCallUrlExpiry: sinon.spy()
         };
         client = new loop.shared.Client(
           {baseServerUrl: "http://fake.api"}
@@ -89,13 +90,37 @@ describe("loop.shared.Client", function() {
       });
 
       it("should request a call url", function() {
+        var callUrlData = {
+          "call_url": "fakeCallUrl",
+          "expiresAt": 60
+        };
+
         client.requestCallUrl("foo", callback);
 
         expect(requests).to.have.length.of(1);
 
         requests[0].respond(200, {"Content-Type": "application/json"},
-                            '{"call_url": "fakeCallUrl"}');
-        sinon.assert.calledWithExactly(callback, null, "fakeCallUrl");
+                            JSON.stringify(callUrlData));
+
+        sinon.assert.calledWithExactly(callback, null, callUrlData);
+      });
+
+      it("should note the call url expiry", function() {
+        var callUrlData = {
+          "call_url": "fakeCallUrl",
+          "expiresAt": 60
+        };
+
+        client.requestCallUrl("foo", callback);
+
+        expect(requests).to.have.length.of(1);
+
+        requests[0].respond(200, {"Content-Type": "application/json"},
+                            JSON.stringify(callUrlData));
+
+        // expiresAt is in hours, and noteCallUrlExpiry wants seconds.
+        sinon.assert.calledWithExactly(navigator.mozLoop.noteCallUrlExpiry,
+          60 * 60 * 60);
       });
 
       it("should send an error when the request fails", function() {
