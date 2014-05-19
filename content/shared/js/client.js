@@ -32,6 +32,13 @@ loop.shared.Client = (function($) {
 
   Client.prototype = {
     /**
+     * Converts from hours to seconds
+     */
+    _hoursToSeconds: function(value) {
+      return value * 60 * 60;
+    },
+
+    /**
      * Validates a data object to confirm it has the specified properties.
      *
      * @param  {Object} The data object to verify
@@ -108,10 +115,13 @@ loop.shared.Client = (function($) {
      *
      * Callback parameters:
      * - err null on successful registration, non-null otherwise.
-     * - callUrl the obtained call url if successful
+     * - callUrlData an object of the obtained call url data if successful:
+     * -- call_url: The url of the call
+     * -- expiresAt: The amount of seconds until expiry of the url
+     *
      * @param  {String} simplepushUrl a registered Simple Push URL
      * @param  {string} nickname the nickname of the future caller
-     * @param  {Function} cb Callback(err, callUrl)
+     * @param  {Function} cb Callback(err, callUrlData)
      */
     _requestCallUrlInternal: function(nickname, cb) {
       var endpoint = this.settings.baseServerUrl + "/call-url/",
@@ -128,7 +138,11 @@ loop.shared.Client = (function($) {
         beforeSend:  this._onBeforeSend.bind(this),
         success: function(callUrlData) {
           try {
-            cb(null, this._validate(callUrlData, ["call_url"]));
+            cb(null, this._validate(callUrlData, ["call_url", "expiresAt"]));
+
+            // Store the expiry time, convert from hours to seconds.
+            var expiresHours = this._hoursToSeconds(callUrlData.expiresAt);
+            this.mozLoop.noteCallUrlExpiry(expiresHours);
           } catch (err) {
             console.log("Error requesting call info", err);
             cb(err);
@@ -141,15 +155,18 @@ loop.shared.Client = (function($) {
     },
 
     /**
-     * Requests a call URL from the Loop server.
+     * Requests a call URL from the Loop server. It will note the
+     * expiry time for the url with the mozLoop api.
      *
      * Callback parameters:
      * - err null on successful registration, non-null otherwise.
-     * - callUrl the obtained call url if successful
+     * - callUrlData an object of the obtained call url data if successful:
+     * -- call_url: The url of the call
+     * -- expiresAt: The amount of seconds until expiry of the url
      *
      * @param  {String} simplepushUrl a registered Simple Push URL
      * @param  {string} nickname the nickname of the future caller
-     * @param  {Function} cb Callback(err, callUrl)
+     * @param  {Function} cb Callback(err, callUrlData)
      */
     requestCallUrl: function(nickname, cb) {
       this._ensureRegistered(function(err) {
