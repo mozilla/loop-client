@@ -13,7 +13,7 @@ describe("loop.shared.Client", function() {
       fakeXHR,
       requests = [],
       callback,
-      mozLoop;
+      fakeToken;
 
   var fakeErrorRes = JSON.stringify({
       status: "errors",
@@ -33,7 +33,7 @@ describe("loop.shared.Client", function() {
       requests.push(xhr);
     };
     callback = sinon.spy();
-    mozLoop = undefined;
+    fakeToken = "fakeTokenText";
   });
 
   afterEach(function() {
@@ -58,9 +58,8 @@ describe("loop.shared.Client", function() {
           noteCallUrlExpiry: sinon.spy()
         };
         client = new loop.shared.Client(
-          {baseServerUrl: "http://fake.api", mozLoop: mozLoop}
+          {baseServerUrl: "http://fake.api", mozLoop: undefined}
         );
-        sandbox.stub(client, "_passSessionCookieIfMozLoop");
       });
 
       afterEach(function() {
@@ -91,11 +90,12 @@ describe("loop.shared.Client", function() {
         expect(requests[0].requestBody).to.be.equal('callerId=foo');
       });
 
-      it("should call this._passSessionCookieIfMozLoop", function () {
+      it("should call _attachAnyServerToken", function() {
+        sandbox.stub(client, "_attachAnyServerToken");
 
-        client.requestCallUrl("fake", callback);
+        client.requestCallUrl("foo", callback);
 
-        sinon.assert.calledOnce(client._passSessionCookieIfMozLoop);
+        sinon.assert.calledOnce(client._attachAnyServerToken);
       });
 
       it("should request a call url", function() {
@@ -160,9 +160,8 @@ describe("loop.shared.Client", function() {
 
       beforeEach(function() {
         client = new loop.shared.Client(
-          {baseServerUrl: "http://fake.api", mozLoop: mozLoop}
+          {baseServerUrl: "http://fake.api", mozLoop: undefined}
         );
-        sandbox.stub(client, "_passSessionCookieIfMozLoop");
       });
 
       it("should prevent launching a conversation when version is missing",
@@ -171,13 +170,6 @@ describe("loop.shared.Client", function() {
             client.requestCallsInfo();
           }).to.Throw(Error, /missing required parameter version/);
         });
-
-      it("should call this._passSessionCookieIfMozLoop", function () {
-
-        client.requestCallsInfo("fake", callback);
-
-        sinon.assert.calledOnce(client._passSessionCookieIfMozLoop);
-      });
 
       it("should request data for all calls", function() {
         client.requestCallsInfo(42, callback);
@@ -189,6 +181,15 @@ describe("loop.shared.Client", function() {
         requests[0].respond(200, {"Content-Type": "application/json"},
                                  '{"calls": [{"apiKey": "fake"}]}');
         sinon.assert.calledWithExactly(callback, null, [{apiKey: "fake"}]);
+      });
+
+      it("should call _attachAnyServerToken", function() {
+        sandbox.stub(client, "_attachAnyServerToken");
+
+        client.requestCallUrl("foo", callback);
+        client.requestCallUrl("foo", callback);
+
+        sinon.assert.calledOnce(client._attachAnyServerToken);
       });
 
       it("should send an error when the request fails", function() {
@@ -217,7 +218,7 @@ describe("loop.shared.Client", function() {
 
       beforeEach(function() {
         client = new loop.shared.Client(
-          {baseServerUrl: "http://fake.api", mozLoop: mozLoop}
+          {baseServerUrl: "http://fake.api", mozLoop: undefined}
         );
       });
 
@@ -271,42 +272,64 @@ describe("loop.shared.Client", function() {
       });
     });
 
-    describe("_passSessionCookieIfMozLoop", function() {
+    describe("_attachAnyServerToken", function () {
       var client,
-          dummyXHR;
+        mozLoop,
+        dummyXHR;
 
-      beforeEach(function () {
+      beforeEach(function() {
+        client = new loop.shared.Client(
+          {baseServerUrl: "http://fake.api", mozLoop: undefined}
+        );
+
+        mozLoop = {
+          getCharPref: sandbox.stub()
+            .returns(null)
+            .withArgs("loop-server-token")
+            .returns(fakeToken)
+        };
+
         dummyXHR = { setRequestHeader: sinon.stub() };
       });
 
-      it("should use xhr.setRequestHeader() to pass the 'loop-session'" +
-        " cookie if 'mozLoop' is defined", function() {
-
-        var fakeCookie = { name: "loop-session", value: "fakeSession" };
-        mozLoop = {};
-        mozLoop.__defineGetter__("cookies", sinon.stub().returns([fakeCookie]));
+      it("should set the Loop-Server-Token header on the XHR request if" +
+        " mozLoop exists and loop.server-token is set in prefs", function() {
         client = new loop.shared.Client(
           {baseServerUrl: "http://fake.api", mozLoop: mozLoop}
         );
 
-        client._passSessionCookieIfMozLoop(dummyXHR);
+        client._attachAnyServerToken(dummyXHR);
 
         sinon.assert.calledOnce(dummyXHR.setRequestHeader);
-        sinon.assert.calledWithExactly(dummyXHR.setRequestHeader, "Cookie",
-          fakeCookie.name + "=" + fakeCookie.value);
+        sinon.assert.calledWithExactly(dummyXHR.setRequestHeader,
+          "Loop-Server-Token", fakeToken);
       });
 
-      it("should not call xhr.setRequestHeader() if mozLoop is undefined",
+      it("should not set the Loop-Server-Token header on the XHR request if" +
+          " mozLoop exists and loop.server-token is not set in prefs",
         function() {
-          mozLoop = undefined;
+          mozLoop.getCharPref.returns(null);
           client = new loop.shared.Client(
             {baseServerUrl: "http://fake.api", mozLoop: mozLoop}
           );
 
-          client._passSessionCookieIfMozLoop(dummyXHR);
+          client._attachAnyServerToken(dummyXHR);
+
+          sinon.assert.notCalled(dummyXHR.setRequestHeader);
+        });
+
+      it("should not set the Loop-Server-Token header on the XHR request if" +
+          " mozLoop does not exist",
+        function() {
+          client = new loop.shared.Client(
+            {baseServerUrl: "http://fake.api", mozLoop: undefined}
+          );
+
+          client._attachAnyServerToken(dummyXHR);
 
           sinon.assert.notCalled(dummyXHR.setRequestHeader);
         });
     });
+
   });
 });

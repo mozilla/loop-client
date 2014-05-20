@@ -132,7 +132,7 @@ loop.shared.Client = (function($) {
         url: endpoint,
         data: reqData,
         xhrFields: {
-          withCredentials: true
+          withCredentials: false
         },
         crossDomain: true,
         beforeSend:  this._onBeforeSend.bind(this),
@@ -203,7 +203,7 @@ loop.shared.Client = (function($) {
         type: "GET",
         url: endpoint + "?version=" + version,
         xhrFields: {
-          withCredentials: true
+          withCredentials: false
         },
         crossDomain: true,
         beforeSend: this._onBeforeSend.bind(this),
@@ -256,19 +256,20 @@ loop.shared.Client = (function($) {
     },
 
     _onBeforeSend: function(xhr) {
-      this._passSessionCookieIfMozLoop(xhr);
+      console.log("in _onBeforeSend");
+      this._attachAnyServerToken(xhr);
+      console.log("exiting _onBeforeSend");
     },
 
-    _passSessionCookieIfMozLoop: function(xhr) {
+    _attachAnyServerToken: function(xhr) {
       if (!this.mozLoop) {
         return;
-      }
+      };
 
-      var cookies = this.mozLoop.cookies;
-      cookies.forEach(function(cookie) {
-        if (cookie.name === "loop-session")
-          xhr.setRequestHeader("Cookie", cookie.name + "=" + cookie.value);
-      });
+      this.loopServerToken = this.mozLoop.getCharPref("loop.server-token");
+      if (this.loopServerToken) {
+        xhr.setRequestHeader("Loop-Server-Token", this.loopServerToken);
+      }
     }
   };
 
