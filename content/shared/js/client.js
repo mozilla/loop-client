@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-/* global loop:true */
+/* global loop:true, hawk*/
 
 var loop = loop || {};
 loop.shared = loop.shared || {};
@@ -255,21 +255,28 @@ loop.shared.Client = (function($) {
       req.fail(this._failureHandler.bind(this, cb));
     },
 
-    _onBeforeSend: function(xhr) {
+    _onBeforeSend: function(xhr, settings) {
       console.log("in _onBeforeSend");
-      this._attachAnyServerToken(xhr);
+      this._attachAnyServerCreds(xhr, settings);
       console.log("exiting _onBeforeSend");
     },
 
-    _attachAnyServerToken: function(xhr) {
+    _attachAnyServerCreds: function(xhr, settings) {
       if (!this.mozLoop) {
         return;
       };
 
-      this.loopServerToken = this.mozLoop.getCharPref("loop.server-token");
-      if (this.loopServerToken) {
-        xhr.setRequestHeader("Loop-Server-Token", this.loopServerToken);
-      }
+      var credentials = {
+        id: this.mozLoop.getCharPref("loop.hawk-identifier"),
+        key: this.mozLoop.getCharPref("loop.hawk-key"),
+        algorithm: this.mozLoop.getCharPref("loop.hawk-algorithm")
+      };
+
+      // XXX should we be passing other options, eg clock stuff?
+      var header = hawk.client.header( settings.url, settings.type,
+        { credentials: credentials } );
+
+      xhr.setRequestHeader("Authorization", header.field);
     }
   };
 

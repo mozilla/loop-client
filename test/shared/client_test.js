@@ -90,12 +90,12 @@ describe("loop.shared.Client", function() {
         expect(requests[0].requestBody).to.be.equal('callerId=foo');
       });
 
-      it("should call _attachAnyServerToken", function() {
-        sandbox.stub(client, "_attachAnyServerToken");
+      it("should call _attachAnyServerCreds", function() {
+        sandbox.stub(client, "_attachAnyServerCreds");
 
         client.requestCallUrl("foo", callback);
 
-        sinon.assert.calledOnce(client._attachAnyServerToken);
+        sinon.assert.calledOnce(client._attachAnyServerCreds);
       });
 
       it("should request a call url", function() {
@@ -183,13 +183,13 @@ describe("loop.shared.Client", function() {
         sinon.assert.calledWithExactly(callback, null, [{apiKey: "fake"}]);
       });
 
-      it("should call _attachAnyServerToken", function() {
-        sandbox.stub(client, "_attachAnyServerToken");
+      it("should call _attachAnyServerCreds", function() {
+        sandbox.stub(client, "_attachAnyServerCreds");
 
         client.requestCallUrl("foo", callback);
         client.requestCallUrl("foo", callback);
 
-        sinon.assert.calledOnce(client._attachAnyServerToken);
+        sinon.assert.calledOnce(client._attachAnyServerCreds);
       });
 
       it("should send an error when the request fails", function() {
@@ -272,7 +272,7 @@ describe("loop.shared.Client", function() {
       });
     });
 
-    describe("_attachAnyServerToken", function () {
+    describe("_attachAnyServerCreds", function () {
       var client,
         mozLoop,
         dummyXHR;
@@ -298,7 +298,7 @@ describe("loop.shared.Client", function() {
           {baseServerUrl: "http://fake.api", mozLoop: mozLoop}
         );
 
-        client._attachAnyServerToken(dummyXHR);
+        client._attachAnyServerCreds(dummyXHR);
 
         sinon.assert.calledOnce(dummyXHR.setRequestHeader);
         sinon.assert.calledWithExactly(dummyXHR.setRequestHeader,
@@ -313,7 +313,7 @@ describe("loop.shared.Client", function() {
             {baseServerUrl: "http://fake.api", mozLoop: mozLoop}
           );
 
-          client._attachAnyServerToken(dummyXHR);
+          client._attachAnyServerCreds(dummyXHR);
 
           sinon.assert.notCalled(dummyXHR.setRequestHeader);
         });
@@ -325,7 +325,7 @@ describe("loop.shared.Client", function() {
             {baseServerUrl: "http://fake.api", mozLoop: undefined}
           );
 
-          client._attachAnyServerToken(dummyXHR);
+          client._attachAnyServerCreds(dummyXHR);
 
           sinon.assert.notCalled(dummyXHR.setRequestHeader);
         });
