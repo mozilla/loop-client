@@ -273,6 +273,8 @@ loop.shared.Client = (function($) {
         // XXX surface to UI somehow
       }
 
+      // XXX do we want to use any of the other hawk params (eg to track clock
+      // skew, etc)?
       deriveHawkCredentials(hawkSessionToken, "sessionToken",
         2 * 32, function (hawkCredentials) {
         var header = hawk.client.header( settings.url, settings.type,
