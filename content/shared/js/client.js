@@ -266,17 +266,19 @@ loop.shared.Client = (function($) {
         return;
       };
 
-      var credentials = {
-        id: this.mozLoop.getCharPref("loop.hawk-identifier"),
-        key: this.mozLoop.getCharPref("loop.hawk-key"),
-        algorithm: this.mozLoop.getCharPref("loop.hawk-algorithm")
-      };
+      try {
+        var hawkSessionToken = this.mozLoop.getCharPref("loop.hawk-session-token");
+      } catch (ex) {
+        console.error("loop.hawk-session-token pref not found");
+        // XXX surface to UI somehow
+      }
 
-      // XXX should we be passing other options, eg clock stuff?
-      var header = hawk.client.header( settings.url, settings.type,
-        { credentials: credentials } );
-
-      xhr.setRequestHeader("Authorization", header.field);
+      deriveHawkCredentials(hawkSessionToken, "sessionToken",
+        2 * 32, function (hawkCredentials) {
+        var header = hawk.client.header( settings.url, settings.type,
+          { credentials: hawkCredentials } );
+        xhr.setRequestHeader("Authorization", header.field);
+      });
     }
   };
 
