@@ -61,7 +61,7 @@ img {
 
 .btn {
   display: inline-block;
-  background: #aaa;
+  background: #a5a;
   border: none;
   color: #fff;
   text-decoration: none;
@@ -138,7 +138,6 @@ img {
 button.close {
   background: none;
   border: none;
-  padding: none;
   cursor: pointer;
 }
 
