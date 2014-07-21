@@ -1,0 +1,15 @@
+Changelog
+=========
+
+This document describes changes between each past release.
+
+0.2.0 (unreleased)
+------------------
+
+- [feature] Land loop-client for MVP on loop-server 0.10.0
+
+
+0.1.0 (2014-06-06)
+------------------
+
+- [feature] Land loop-client for MLP on loop-server 0.5.0
