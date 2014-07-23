@@ -22,16 +22,19 @@ git pull
 
 echo -e "\n = UPGRADING LOOP-CLIENT from GECKO-DEV ="
 # Clean current content
-rm -fr content/
+rm -fr content/ test/
 
 # Update loop-client from gecko-dev
 cp -fr ${GECKO_DEV}/browser/components/loop/standalone/* ${LOOP_CLIENT}
 cp -fr ${GECKO_DEV}/browser/components/loop/content/shared/ ${LOOP_CLIENT}/content/
+mkdir -p ${LOOP_CLIENT}/test
+cp -fr ${GECKO_DEV}/browser/components/loop/test/standalone ${LOOP_CLIENT}/test
+cp -fr ${GECKO_DEV}/browser/components/loop/test/shared ${LOOP_CLIENT}/test
 
 # Build snapshot
 cd $LOOP_CLIENT/..
 echo -e "\n = BUILDING ${TMP}/${TAR_GZ_NAME} ="
-tar zcvf "${TMP}/${TAR_GZ_NAME}" --exclude=.git $(basename $LOOP_CLIENT)
+tar zcvf "${TMP}/${TAR_GZ_NAME}" --exclude=.git --exclude=test $(basename $LOOP_CLIENT)
 
 cd $LOOP_CLIENT
 echo -e "\n = COMMITING new snapshot ="
