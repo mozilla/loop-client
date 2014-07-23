@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 TMP=${TMP-/tmp}
 LOOP_CLIENT=$(pwd)
 GECKO_DEV=$(pwd)/../gecko-dev/
