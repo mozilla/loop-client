@@ -26,5 +26,5 @@ config:
 	@echo "loop.config = loop.config || {};" >> content/config.js
 	@echo "loop.config.serverUrl          = '`echo $(LOOP_SERVER_URL)`';" >> content/config.js
 	@echo "loop.config.pendingCallTimeout = `echo $(LOOP_PENDING_CALL_TIMEOUT)`;" >> content/config.js
-	@git describe --always --tag > VERSION
-	@git log -1 --format="%H%n%aD" >> VERSION
+	@git describe --always --tag > content/VERSION.txt
+	@git log -1 --format="%H%n%aD" >> content/VERSION.txt
