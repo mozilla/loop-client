@@ -138,11 +138,9 @@ loop.shared.views = (function(_, OT, l10n) {
 
     render: function() {
       return (
-        /* jshint ignore:start */
-        React.DOM.button({className: this._getClasses(), 
-                title: this._getTitle(), 
-                onClick: this.handleClick})
-        /* jshint ignore:end */
+        React.DOM.button( {className:this._getClasses(),
+                title:this._getTitle(),
+                onClick:this.handleClick})
       );
     }
   });
@@ -178,21 +176,19 @@ loop.shared.views = (function(_, OT, l10n) {
     },
 
     render: function() {
-      /* jshint ignore:start */
       return (
-        React.DOM.ul({className: "controls"}, 
-          React.DOM.li(null, React.DOM.button({className: "btn btn-hangup", 
-                      onClick: this.handleClickHangup, 
-                      title: __("hangup_button_title")})), 
-          React.DOM.li(null, MediaControlButton({action: this.handleToggleVideo, 
-                                  enabled: this.props.video.enabled, 
-                                  scope: "local", type: "video"})), 
-          React.DOM.li(null, MediaControlButton({action: this.handleToggleAudio, 
-                                  enabled: this.props.audio.enabled, 
-                                  scope: "local", type: "audio"}))
+        React.DOM.ul( {className:"controls"}, 
+          React.DOM.li(null, React.DOM.button( {className:"btn btn-hangup",
+                      onClick:this.handleClickHangup,
+                      title:__("hangup_button_title")})),
+          React.DOM.li(null, MediaControlButton( {action:this.handleToggleVideo,
+                                  enabled:this.props.video.enabled,
+                                  scope:"local", type:"video"} )),
+          React.DOM.li(null, MediaControlButton( {action:this.handleToggleAudio,
+                                  enabled:this.props.audio.enabled,
+                                  scope:"local", type:"audio"} ))
         )
       );
-      /* jshint ignore:end */
     }
   });
 
@@ -204,12 +200,11 @@ loop.shared.views = (function(_, OT, l10n) {
       model: React.PropTypes.object.isRequired
     },
 
-    // height set to 100%" to fix video layout on Google Chrome
-    // @see https://bugzilla.mozilla.org/show_bug.cgi?id=1020445
+    // height set to "auto" to fix video layout on Google Chrome
+    // @see https://bugzilla.mozilla.org/show_bug.cgi?id=991122
     publisherConfig: {
-      insertMode: "append",
       width: "100%",
-      height: "100%",
+      height: "auto",
       style: {
         bugDisplayMode: "off",
         buttonDisplayMode: "off",
@@ -225,6 +220,10 @@ loop.shared.views = (function(_, OT, l10n) {
     },
 
     componentDidMount: function() {
+      this.props.model.startSession();
+    },
+
+    componentWillMount: function() {
       this.listenTo(this.props.model, "session:connected",
                                       this.startPublishing);
       this.listenTo(this.props.model, "session:stream-created",
@@ -233,13 +232,9 @@ loop.shared.views = (function(_, OT, l10n) {
                                        "session:network-disconnected",
                                        "session:ended"].join(" "),
                                        this.stopPublishing);
-
-      this.props.model.startSession();
     },
 
     componentWillUnmount: function() {
-      // Unregister all local event listeners
-      this.stopListening();
       this.hangup();
     },
 
@@ -259,7 +254,7 @@ loop.shared.views = (function(_, OT, l10n) {
      * @param  {StreamEvent} event
      */
     _streamCreated: function(event) {
-      var incoming = this.getDOMNode().querySelector(".remote");
+      var incoming = this.getDOMNode().querySelector(".incoming");
       event.streams.forEach(function(stream) {
         if (stream.connection.connectionId !==
             this.props.model.session.connection.connectionId) {
@@ -277,26 +272,29 @@ loop.shared.views = (function(_, OT, l10n) {
      * @param  {SessionConnectEvent} event
      */
     startPublishing: function(event) {
-      var outgoing = this.getDOMNode().querySelector(".local");
+      var outgoing = this.getDOMNode().querySelector(".outgoing");
 
       // XXX move this into its StreamingVideo component?
       this.publisher = this.props.sdk.initPublisher(
         outgoing, this.publisherConfig);
 
       // Suppress OT GuM custom dialog, see bug 1018875
-      this.listenTo(this.publisher, "accessDialogOpened accessDenied",
-                    function(event) {
-                      event.preventDefault();
-                    });
+      function preventOpeningAccessDialog(event) {
+        event.preventDefault();
+      }
+      this.publisher.on("accessDialogOpened", preventOpeningAccessDialog);
+      this.publisher.on("accessDenied", preventOpeningAccessDialog);
 
-      this.listenTo(this.publisher, "streamCreated", function(event) {
+      this.publisher.on("streamCreated", function(event) {
+//        if (this.props._websocket)
+          this.props.model._websocket.mediaUp();
         this.setState({
           audio: {enabled: event.stream.hasAudio},
           video: {enabled: event.stream.hasVideo}
         });
       }.bind(this));
 
-      this.listenTo(this.publisher, "streamDestroyed", function() {
+      this.publisher.on("streamDestroyed", function() {
         this.setState({
           audio: {enabled: false},
           video: {enabled: false}
@@ -326,29 +324,26 @@ loop.shared.views = (function(_, OT, l10n) {
      * Unpublishes local stream.
      */
     stopPublishing: function() {
-      // Unregister listeners for publisher events
-      this.stopListening(this.publisher);
+      // Unregister access OT GuM custom dialog listeners, see bug 1018875
+      this.publisher.off("accessDialogOpened");
+      this.publisher.off("accessDenied");
 
       this.props.model.session.unpublish(this.publisher);
     },
 
     render: function() {
-      /* jshint ignore:start */
       return (
-        React.DOM.div({className: "conversation"}, 
-          ConversationToolbar({video: this.state.video, 
-                               audio: this.state.audio, 
-                               publishStream: this.publishStream, 
-                               hangup: this.hangup}), 
-          React.DOM.div({className: "media nested"}, 
-            React.DOM.div({className: "video_wrapper remote_wrapper"}, 
-              React.DOM.div({className: "video_inner remote"})
-            ), 
-            React.DOM.div({className: "local"})
+        React.DOM.div( {className:"conversation"}, 
+          ConversationToolbar( {video:this.state.video,
+                               audio:this.state.audio,
+                               publishStream:this.publishStream,
+                               hangup:this.hangup} ),
+          React.DOM.div( {className:"media nested"}, 
+            React.DOM.div( {className:"remote"}, React.DOM.div( {className:"incoming"})),
+            React.DOM.div( {className:"local"}, React.DOM.div( {className:"outgoing"}))
           )
         )
       );
-      /* jshint ignore:end */
     }
   });
 
