@@ -3,6 +3,12 @@ Changelog
 
 This document describes changes between each past release.
 
+0.3.0 (unreleased)
+------------------
+
+- Bug 1000134 Implement revoke generated URL for incoming call view
+- Bug 1044188 Update message for link clickers using browsers without WebRTC support
+
 0.2.0 (unreleased)
 ------------------
 
