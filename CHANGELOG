@@ -3,13 +3,24 @@ Changelog
 
 This document describes changes between each past release.
 
-0.3.0 (unreleased)
+0.3.2 (2014-07-30)
+------------------
+
+- Bug 1044796 Add a VERSION.txt file (synced with m-c)
+- Bug 1044419 Use the same version of the sdk as the desktop client
+
+0.3.1 (2014-07-29)
+------------------
+
+- Bug 1044796 Add a VERSION.txt file
+
+0.3.0 (2014-07-29)
 ------------------
 
 - Bug 1000134 Implement revoke generated URL for incoming call view
 - Bug 1044188 Update message for link clickers using browsers without WebRTC support
 
-0.2.0 (unreleased)
+0.2.0 (2014-07-13)
 ------------------
 
 - [feature] Land loop-client for MVP on loop-server 0.10.0

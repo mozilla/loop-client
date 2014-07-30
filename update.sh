@@ -8,8 +8,8 @@ GECKO_BRANCH=master
 cd $GECKO_DEV
 echo " = UPDATING GECKO-DEV ="
 pwd
-git checkout master
-git pull
+#git checkout master
+#git pull
 GECKO_REV=$(git rev-parse HEAD)
 TAR_GZ_NAME="loop-client_${GECKO_REV}.tar.gz"
 
@@ -39,6 +39,6 @@ tar zcvf "${TMP}/${TAR_GZ_NAME}" --exclude=.git --exclude=test --exclude=node_mo
 cd $LOOP_CLIENT
 echo -e "\n = COMMITING new snapshot ="
 pwd
-git add -u .; git add .; git commit -m "Update to gecko-dev REV ${GECKO_REV}."
+#git add -u .; git add .; git commit -m "Update to gecko-dev REV ${GECKO_REV}."
 echo -e "\n Snapshot in: ${TMP}/${TAR_GZ_NAME}"
 echo -e "\n Don't forget to push you changes to loop-client if you are ok with them."
