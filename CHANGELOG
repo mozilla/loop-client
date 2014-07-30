@@ -8,6 +8,8 @@ This document describes changes between each past release.
 
 - Bug 1044796 Add a VERSION.txt file (synced with m-c)
 - Bug 1044419 Use the same version of the sdk as the desktop client
+- Bug 1000131 (Part 2): Loop expired call url view styling
+- Bug 1042799: Loop UI components showcase
 
 0.3.1 (2014-07-29)
 ------------------
