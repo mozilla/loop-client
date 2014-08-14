@@ -12,6 +12,10 @@ install:
 test:
 	@echo "Not implemented yet."
 
+tos:
+	@$(NODE_LOCAL_BIN)/grunt replace marked
+	@$(NODE_LOCAL_BIN)/grunt sass
+
 lint:
 	@$(NODE_LOCAL_BIN)/jshint *.js content test
 

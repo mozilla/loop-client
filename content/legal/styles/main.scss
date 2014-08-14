@@ -1,10 +1,10 @@
-@font-face { font-family: fontello; src: url(/fonts/icons/fontello.eot#iefix) format(embedded-opentype), url(/fonts/icons/fontello.woff) format(woff), url(/fonts/icons/fontello.ttf) format(truetype), url(/fonts/icons/fontello.svg#fontello) format(svg); font-weight: 400; font-style: normal; }
+@font-face { font-family: fontello; src: url(/fonts/icons/fontello.eot#iefix) format(embedded-opentype), url(/legal/fonts/icons/fontello.woff) format(woff), url(/legal/fonts/icons/fontello.ttf) format(truetype), url(/legal/fonts/icons/fontello.svg#fontello) format(svg); font-weight: 400; font-style: normal; }
 
-@font-face { font-family: 'Clear Sans'; font-style: normal; font-weight: 400; src: local(Clear Sans), local(ClearSans), url(/fonts/latin/clearsans-regular.eot?#iefix) format(embedded-opentype), url(/fonts/latin/clearsans-regular.woff) format(woff), url(/fonts/latin/clearsans-regular.ttf) format(truetype), url(/fonts/latin/clearsans-regular.svg#clearsans-regular) format(svg); }
+@font-face { font-family: 'Clear Sans'; font-style: normal; font-weight: 400; src: local(Clear Sans), local(ClearSans), url(/legal/fonts/latin/clearsans-regular.eot?#iefix) format(embedded-opentype), url(/legal/fonts/latin/clearsans-regular.woff) format(woff), url(/legal/fonts/latin/clearsans-regular.ttf) format(truetype), url(/legal/fonts/latin/clearsans-regular.svg#clearsans-regular) format(svg); }
 
-@font-face { font-family: 'Fira Sans'; font-style: normal; font-weight: 400; src: local(Fira Sans), local(FiraSans-Regular), url(/fonts/latin/firasans-regular.eot?#iefix) format(embedded-opentype), url(/fonts/latin/firasans-regular.woff) format(woff), url(/fonts/latin/firasans-regular.ttf) format(truetype), url(/fonts/latin/firasans-regular.svg#firasans-regular) format(svg); }
+@font-face { font-family: 'Fira Sans'; font-style: normal; font-weight: 400; src: local(Fira Sans), local(FiraSans-Regular), url(/legal/fonts/latin/firasans-regular.eot?#iefix) format(embedded-opentype), url(/legal/fonts/latin/firasans-regular.woff) format(woff), url(/legal/fonts/latin/firasans-regular.ttf) format(truetype), url(/legal/fonts/latin/firasans-regular.svg#firasans-regular) format(svg); }
 
-@font-face { font-family: 'Fira Sans'; font-style: normal; font-weight: 300; src: local(Fira Sans Light), local(FiraSans-Light), url(/fonts/latin/firasans-light.eot?#iefix) format(embedded-opentype), url(/fonts/latin/firasans-light.woff) format(woff), url(/fonts/latin/firasans-light.ttf) format(truetype), url(/fonts/latin/firasans-light.svg#firasans-light) format(svg); }
+@font-face { font-family: 'Fira Sans'; font-style: normal; font-weight: 300; src: local(Fira Sans Light), local(FiraSans-Light), url(/legal/fonts/latin/firasans-light.eot?#iefix) format(embedded-opentype), url(/legal/fonts/latin/firasans-light.woff) format(woff), url(/legal/fonts/latin/firasans-light.ttf) format(truetype), url(/legal/fonts/latin/firasans-light.svg#firasans-light) format(svg); }
 
 @media (min-width: 321px) and (max-width: 480px) {
 	#about-mozilla {
@@ -147,7 +147,7 @@
 	-webkit-background-size: 69px 19px;
 	-webkit-transition-duration: 150ms;
 	-webkit-transition-property: opacity;
-	background-image: url(/images/mozilla.png);
+	background-image: url(/legal/images/mozilla.png);
 	background-size: 69px 19px;
 	height: 19px;
 	opacity: 0.5;
@@ -170,7 +170,7 @@
 }
 
 .static {
-	background-image: url(/images/firefox.png);
+	background-image: url(/legal/images/firefox.png);
 	margin-bottom: 0px;
 	margin-left: auto;
 	margin-right: auto;
