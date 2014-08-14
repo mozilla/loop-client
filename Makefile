@@ -6,7 +6,9 @@ LOOP_SERVER_URL := $(shell echo $${LOOP_SERVER_URL-http://localhost:5000})
 LOOP_PENDING_CALL_TIMEOUT := $(shell echo $${LOOP_PENDING_CALL_TIMEOUT-20000})
 NODE_LOCAL_BIN=./node_modules/.bin
 
-install:
+install: npm_install tos
+
+npm_install:
 	@npm install
 
 test:
