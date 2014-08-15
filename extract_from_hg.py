@@ -141,6 +141,7 @@ def pullHg(hgRepo, hgUI):
     if commands.incoming(hgUI, hgRepo, source=M_C_SOURCE_URL, bundle=None,
                          force=None) == 0:
         commands.pull(hgUI, hgRepo, source=M_C_SOURCE_URL)
+        commands.update(hgUI, hgRepo, rev='default')
 
 
 def pullGit(branch):
