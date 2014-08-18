@@ -1,5 +1,5 @@
 {
-  "name": "loop-server",
+  "name": "loop-client",
   "version": "0.0.0",
   "dependencies": {
     "tos-pp": "https://github.com/mozilla/legal-docs.git"
