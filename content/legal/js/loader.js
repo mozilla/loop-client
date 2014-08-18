@@ -8,7 +8,7 @@ function setBody(data) {
 }
 
 function normalizeLocale(lang) {
-  return lang.replace("-", "_");
+  return lang.replace(/-/g, "_");
 }
 
 $(document).ready(function() {
