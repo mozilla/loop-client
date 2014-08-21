@@ -24,7 +24,7 @@ $(document).ready(function() {
     }
 
     $.get(lang + ".html")
-      .done(setBody);
+      .done(setBody)
       .fail(function() {
         $.get(defaultLang + ".html")
           .done(setBody);
