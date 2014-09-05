@@ -3,6 +3,37 @@ Changelog
 
 This document describes changes between each past release.
 
+0.5.0 (2014-09-05)
+------------------
+- Bug 1050301 Loop-client now has a script to generate the release
+- Bug 990678  Add ability to make audio only calls in Loop
+- Bug 1022594 Desktop client needs ability to decline an incoming call (standalone
+              client now detects this)
+- Bug 1046178 Stop using hardcoded brand names in L10n data files
+- Bug 1019454 Hide ToS when it has been seen in the standalone UI
+- Bug 1058258 Fix typos and improve some of the Loop text
+- Bug 1048938 Update Loop conversation layout to match latest design from the
+              mockups (parts 1 and 2)
+- Bug 1059717 Drop creating zip files from the loop-client release process
+- Bug 1045643 Notify the Loop server when the client has local media up and remote media
+              being received
+- Bug 1060525 Various string changes for Loop based on UX feedback
+- Bug 1060452 Add generic-failure string for Loop clients.
+- Bug 1061154 Part 2 and 3 Change existing Loop strings based on UX feedback
+- Bug 1062835 Missing text on Loop's link-clicker UI for non-English locales
+
+0.4.0 (2014-08-13)
+------------------
+- Bug 1050131 Now includes a file to auto-extract changesets from m-c
+- Bug 1000127 Implement the new link-clicker layout
+- Bug 1040662 Upgrade Loop's use of React to version 0.11.1
+- Bug 976114  Stand up basic function test, changes how config.js is generated
+- Bug 1022594 Part 1 Change call handling to get the call details before
+              showing the UI
+- Bug 1050314 Loop standalone client is broken in Chrome due to use of ES6 functions
+- Bug 1049927 Update OpenTok library to 2.2.7
+- Bug 1053181 Fix Loop's standalone pages to display correctly on the proper dev server
+
 0.3.2 (2014-07-30)
 ------------------
 
