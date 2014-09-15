@@ -68,7 +68,7 @@ def updatePathsInTestFile(filename, fileContext):
 # Write a file out to disk, fileContext is the hg file context.
 def writeFile(filename, fileContext):
     directory = os.path.dirname(filename)
-    if not os.path.isdir(directory):
+    if directory and not os.path.isdir(directory):
         os.makedirs(directory)
 
     outFile = open(filename, "w")
