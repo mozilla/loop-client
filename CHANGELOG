@@ -3,6 +3,34 @@ Changelog
 
 This document describes changes between each past release.
 
+0.6.0 (2014-09-22)
+------------------
+- Bug 1061436 Extraction script doesn't take account of added directories
+- Bug 1002416 Rework the Loop notification system to better surface failures to the user and use react based views
+- Bug 1049565 Update style for feedback form back button
+- Bug 1065608 Drop the remaining backbone views for Loop (switch to react)
+- Bug 1067245 Loop-client extraction script fails when changing files in the root directory
+- Bug 1066219 Update OpenTok library to 2.2.9
+- Bug 1000237 Standalone UI for link clickers needs "call being processed" visual notification
+- Bug 1066506 Allow easy debugging of websockets and sdk for Loop
+- Bug 1042060 Implement default answering mode for desktop client
+- Bug 1067519 Loop desktop client should close the conversation window if the caller chooses to cancel the call
+- Bug 1044411 Generate Loop ToS static content
+- Bug 1066567 Part 1. Stop use of the backbone router in the standalone UI to simplify code. The views now exclusively manage what is displayed according to state
+- Bug 1066567 Part 2. Rename some old variables in the Loop OutgoingConversationView
+- Bug 1035846 Update the ToS link for the Loop standalone UI
+- Bug 1067937 Fix translation of Loop's link-clicker UI in Google Chrome
+- Bug 1069178 Drop some old references to serverUrl/baseServerUrl in Loop desktop code
+- Bug 974873  Add feedback form to Loop standalone conversation window
+
+Config changes:
+- Removed:
+-- LOOP_PENDING_CALL_TIMEOUT / loop.config.pendingCallTimeout
+- Added:
+-- LOOP_FEEDBACK_API_URL / loop.config.feedbackApiUrl
+-- LOOP_FEEDBACK_PRODUCT_NAME / loop.config.feedbackProductName
+
+
 0.5.0 (2014-09-05)
 ------------------
 - Bug 1050301 Loop-client now has a script to generate the release
