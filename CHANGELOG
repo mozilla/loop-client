@@ -3,6 +3,10 @@ Changelog
 
 This document describes changes between each past release.
 
+0.6.1 (2014-09-24)
+------------------
+- Bug 1035846 Follow-up to fix the ToS link for staging/production.
+
 0.6.0 (2014-09-22)
 ------------------
 - Bug 1061436 Extraction script doesn't take account of added directories
