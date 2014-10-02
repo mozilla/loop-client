@@ -3,6 +3,18 @@ Changelog
 
 This document describes changes between each past release.
 
+0.7.0 (2014-10-02)
+------------------
+- Bug 1072279 - Prevent unnecessary scrollbars in Loop conversation window
+- Bug 1008990 - Loop standalone UI should hand off to FxOS Loop client
+- Bug 1000240 - Add a Call Failed view for Loop standalone UI.
+
+Config changes:
+- Added:
+-- loop.config.fxosApp
+-- loop.config.fxosApp.name
+-- loop.config.fxosApp.manifestUrl
+
 0.6.1 (2014-09-24)
 ------------------
 - Bug 1035846 Follow-up to fix the ToS link for staging/production.
