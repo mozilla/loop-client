@@ -11,6 +11,7 @@ This document describes changes between each past release.
 - Bug 1078345 - Change references from Firefox WebRTC to Firefox Hello in the standalone UI
 - Bug 1080476 - Upgrade React to 0.11.2
 - Bug 1081095 - Fix a couple of issues on the standalone start page with Firefox Hello information
+- Bug 1077518 - Standalone link clicker UI needs a beta tag
 
 0.7.0 (2014-10-02)
 ------------------
