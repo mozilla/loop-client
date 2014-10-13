@@ -3,6 +3,15 @@ Changelog
 
 This document describes changes between each past release.
 
+0.8.0 (2014-10-13)
+------------------
+- Bug 1065537 - Loop isn't using system/platform fonts in various places
+- Bug 1079430 - Land the new Loop strings for Firefox 35
+- Bug 1070753 - Rename standalone client's page title to Firefox Hello
+- Bug 1078345 - Change references from Firefox WebRTC to Firefox Hello in the standalone UI
+- Bug 1080476 - Upgrade React to 0.11.2
+- Bug 1081095 - Fix a couple of issues on the standalone start page with Firefox Hello information
+
 0.7.0 (2014-10-02)
 ------------------
 - Bug 1072279 - Prevent unnecessary scrollbars in Loop conversation window
