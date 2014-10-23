@@ -3,6 +3,24 @@ Changelog
 
 This document describes changes between each past release.
 
+0.9.0 (2014-10-23)
+------------------
+- Bug 1081029 - Standalone link clicker call state in the page title (tab name)
+- Bug 1077518 - Standalone link clicker UI needs a beta tag
+- Bug 1078226 - Unexpected Audio Level indicator on audio-only calls for Loop, also disable broken low-quality video warning indicator
+- Bug 1081959 - "Something went wrong" isn't displayed when the call fails in the connection phase
+- Bug 1085451 - Implement new design for Loop's green call buttons.
+- Bug 1081189 - Move URLs out of loop.en-us.properties and into the config file and Makefile
+- Bug 1081023 - Handle call url changes to the format for Loop's call links
+- Bug 1074517 - Second call with a Loop url gets disconnected - ensure stream published/subscribed flags are properly reset
+- Bug 1033579 - Add channel to POST calls for Loop to allow different servers based on the channel.
+
+Config changes:
+- Added:
+-- loop.config.brandWebsiteUrl
+-- loop.config.privacyWebsiteUrl
+-- loop.config.legalWebsiteUrl
+
 0.8.0 (2014-10-13)
 ------------------
 - Bug 1065537 - Loop isn't using system/platform fonts in various places
@@ -11,6 +29,7 @@ This document describes changes between each past release.
 - Bug 1078345 - Change references from Firefox WebRTC to Firefox Hello in the standalone UI
 - Bug 1080476 - Upgrade React to 0.11.2
 - Bug 1081095 - Fix a couple of issues on the standalone start page with Firefox Hello information
+- Bug 1077518 - Standalone link clicker UI needs a beta tag
 
 0.7.0 (2014-10-02)
 ------------------
