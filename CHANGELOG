@@ -33,6 +33,10 @@ This document describes changes between each past release.
 - Bug 1097743 - Part 1: Loop standalone styling enhancements
 - Bug 1097742 - Part 1 Handle access being denied to media, and prevent the sdk prompts from showing in Loop Rooms
 
+Config changes:
+- Added:
+-- loop.config.learnMoreUrl
+
 0.9.0 (2014-10-23)
 ------------------
 - Bug 1081029 - Standalone link clicker call state in the page title (tab name)
