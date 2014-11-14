@@ -3,6 +3,36 @@ Changelog
 
 This document describes changes between each past release.
 
+0.10.0 (2014-11-14)
+-------------------
+- Bug 1033579 - Add channel to POST calls for Loop to allow different servers based on the channel
+- Bug 1077599 - Rounding corners of buttons
+- Bug 1065203 - Add some sound notifications for Loop's standalone link-clicker ui
+- Bug 1078718 - Force standalone app reload on hashchange event
+- Bug 1084228 - Replace 'callId' with 'windowId' in a Loop conversation window so that it represents what it is and is distinct from the real 'callId'
+- Bug 1077653 - Add incoming call button icon spacing
+- Bug 1075509 - Standalone UI needs "call failed" sound
+- Bug 1093620 - Using a single root store for Loop rooms
+- Bug 1094128 - Convert the Loop Standalone controller app view to be based on the Flux style
+- Bug 1065201 - introduce new sounds for Hello standalone and desktop
+- Bug 1074688 - Part 3 Hook the new activeRoomStore into the standalone views, and also extend the store to manage joining rooms on the Loop server
+- Bug 1073415 - Add some polyfills for supporting IE for Loop's use of the l10n-gaia library and the TB SDK
+- Bug 1074702 - Part 1 Implement join/refresh/leave with the Loop server on the standalone UI
+- Bug 1093931 - Update Loop mocha unit test framework to v2.0.1, which supports Promises
+- Bug 1074686 - Part 2: Implement room views for Loop Desktop
+- Bug 1074686 - Part 4 Improve Loop conversation store registration to only register for actions when they need it, and change PeerHungupCall into RemotePeerDisconnected to fit better with what it is for
+- Bug 1074686 - Part 5 Hook up the active room store to the sdk for Loop rooms on desktop to enable audio and video in rooms
+- Bug 1074696 - Allow the user to copy and email Loop room urls from the room preview
+- Bug 1074670 - Implement the Hello NotificationView's button (e.g. retry)
+- Bug 1074702 - Part 2: Room views for Loop standalone
+- Bug 1074693 - Loop desktop room preview to use fullscreen local video stream
+- Bug 1074707 - Add notifications when the room is empty on Loop standalone
+- Bug 1076794 - Make Loop calls handle networkDisconnected events properly so that the correct messages get displayed
+- Bug 1074709 - Notify Loop room users when the room is full
+- Bug 1097733 - Enable Loop Rooms to be reused without reloading, by resetting the multiplex gum
+- Bug 1097743 - Part 1: Loop standalone styling enhancements
+- Bug 1097742 - Part 1 Handle access being denied to media, and prevent the sdk prompts from showing in Loop Rooms
+
 0.9.0 (2014-10-23)
 ------------------
 - Bug 1081029 - Standalone link clicker call state in the page title (tab name)
