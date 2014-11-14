@@ -32,11 +32,11 @@ loop.standaloneMedia = (function() {
     }
   }
 
-  // originalGum _must_ be on navigator; otherwise things blow up.
-  // For TBPlugin users, navigator.originalGum is set after the TB SDK is loaded.
+  // originalGum _must_ be on navigator; otherwise things blow up
   navigator.originalGum = navigator.getUserMedia ||
                           navigator.mozGetUserMedia ||
-                          navigator.webkitGetUserMedia;
+                          navigator.webkitGetUserMedia ||
+                          (window["TBPlugin"] && TBPlugin.getUserMedia);
 
   function _MultiplexGum() {
     this.reset();
