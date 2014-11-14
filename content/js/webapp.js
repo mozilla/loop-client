@@ -27,7 +27,7 @@ loop.webapp = (function($, _, OT, mozL10n) {
    */
   var HomeView = React.createClass({displayName: 'HomeView',
     render: function() {
-      multiplexGum.reset();
+      loop.standaloneMedia.multiplexGum.reset();
       return (
         React.DOM.p(null, mozL10n.get("welcome", {clientShortname: mozL10n.get("clientShortname2")}))
       );
@@ -291,7 +291,7 @@ loop.webapp = (function($, _, OT, mozL10n) {
     },
 
     _cancelOutgoingCall: function() {
-      multiplexGum.reset();
+      loop.standaloneMedia.multiplexGum.reset();
       this.props.websocket.cancel();
     },
 
@@ -846,8 +846,6 @@ loop.webapp = (function($, _, OT, mozL10n) {
      *                        timeout, cancel, media-fail, user-unknown, closed)
      */
     _handleCallTerminated: function(reason) {
-      multiplexGum.reset();
-
       if (reason === "cancel") {
         this.setState({callStatus: "start"});
         return;
