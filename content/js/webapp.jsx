@@ -20,14 +20,11 @@ loop.webapp = (function($, _, OT, mozL10n) {
   var sharedViews = loop.shared.views;
   var sharedUtils = loop.shared.utils;
 
-  var multiplexGum = loop.standaloneMedia.multiplexGum;
-
   /**
    * Homepage view.
    */
   var HomeView = React.createClass({
     render: function() {
-      loop.standaloneMedia.multiplexGum.reset();
       return (
         <p>{mozL10n.get("welcome", {clientShortname: mozL10n.get("clientShortname2")})}</p>
       );
@@ -291,7 +288,6 @@ loop.webapp = (function($, _, OT, mozL10n) {
     },
 
     _cancelOutgoingCall: function() {
-      loop.standaloneMedia.multiplexGum.reset();
       this.props.websocket.cancel();
     },
 
@@ -453,15 +449,8 @@ loop.webapp = (function($, _, OT, mozL10n) {
      */
     startCall: function(callType) {
       return function() {
-        multiplexGum.getPermsAndCacheMedia({audio:true, video:true},
-          function(localStream) {
-            this.props.conversation.setupOutgoingCall(callType);
-            this.setState({disableCallButton: true});
-          }.bind(this),
-          function(errorCode) {
-            multiplexGum.reset();
-          }.bind(this)
-        );
+        this.props.conversation.setupOutgoingCall(callType);
+        this.setState({disableCallButton: true});
       }.bind(this);
     },
 

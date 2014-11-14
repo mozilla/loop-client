@@ -14,11 +14,9 @@ describe("loop.webapp", function() {
   var sharedModels = loop.shared.models,
       sharedViews = loop.shared.views,
       sharedUtils = loop.shared.utils,
-      standaloneMedia = loop.standaloneMedia,
       sandbox,
       notifications,
       feedbackApiClient,
-      stubGetPermsAndCacheMedia,
       fakeAudioXHR;
 
   beforeEach(function() {
@@ -27,9 +25,6 @@ describe("loop.webapp", function() {
     feedbackApiClient = new loop.FeedbackAPIClient("http://invalid", {
       product: "Loop"
     });
-
-    stubGetPermsAndCacheMedia = sandbox.stub(
-      loop.standaloneMedia._MultiplexGum.prototype, "getPermsAndCacheMedia");
 
     fakeAudioXHR = {
       open: sinon.spy(),
@@ -662,19 +657,6 @@ describe("loop.webapp", function() {
     });
   });
 
-  describe("HomeView", function() {
-    it("should call loop.standaloneMedia.reset", function() {
-      var multiplexGum = new standaloneMedia._MultiplexGum();
-      standaloneMedia.setSingleton(multiplexGum);
-      sandbox.stub(standaloneMedia._MultiplexGum.prototype, "reset");
-
-      TestUtils.renderIntoDocument(loop.webapp.HomeView());
-
-      sinon.assert.calledOnce(multiplexGum.reset);
-      sinon.assert.calledWithExactly(multiplexGum.reset);
-    });
-  });
-
   describe("PendingConversationView", function() {
     var view, websocket, fakeAudio;
 
@@ -721,18 +703,6 @@ describe("loop.webapp", function() {
         React.addons.TestUtils.Simulate.click(button);
 
         sinon.assert.calledOnce(websocket.cancel);
-      });
-
-      it("should call multiplexGum.reset to release the camera", function() {
-        var multiplexGum = new standaloneMedia._MultiplexGum();
-        standaloneMedia.setSingleton(multiplexGum);
-        sandbox.stub(standaloneMedia._MultiplexGum.prototype, "reset");
-
-        var button = view.getDOMNode().querySelector(".btn-cancel");
-        React.addons.TestUtils.Simulate.click(button);
-
-        sinon.assert.calledOnce(multiplexGum.reset);
-        sinon.assert.calledWithExactly(multiplexGum.reset);
       });
     });
 
@@ -784,26 +754,7 @@ describe("loop.webapp", function() {
               client: standaloneClientStub
             })
         );
-
-        // default to succeeding with a null local media object
-        stubGetPermsAndCacheMedia.callsArgWith(1, {});
       });
-
-      it("should fire multiplexGum.reset when getPermsAndCacheMedia calls" +
-        " back an error",
-        function() {
-          var setupOutgoingCall = sinon.stub(conversation, "setupOutgoingCall");
-          var multiplexGum = new standaloneMedia._MultiplexGum();
-          standaloneMedia.setSingleton(multiplexGum);
-          sandbox.stub(standaloneMedia._MultiplexGum.prototype, "reset");
-          stubGetPermsAndCacheMedia.callsArgWith(2, "FAKE_ERROR");
-
-          var button = view.getDOMNode().querySelector(".btn-accept");
-          React.addons.TestUtils.Simulate.click(button);
-
-          sinon.assert.calledOnce(multiplexGum.reset);
-          sinon.assert.calledWithExactly(multiplexGum.reset);
-        });
 
       it("should start the audio-video conversation establishment process",
         function() {
@@ -1114,9 +1065,6 @@ describe("loop.webapp", function() {
               client: standaloneClientStub
             })
         );
-
-        // default to succeeding with a null local media object
-        stubGetPermsAndCacheMedia.callsArgWith(1, {});
       });
 
       it("should start the conversation establishment process", function() {
