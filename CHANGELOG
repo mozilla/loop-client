@@ -3,6 +3,29 @@ Changelog
 
 This document describes changes between each past release.
 
+0.11.0 (2014-11-26)
+-------------------
+
+- Bug 1084362 - When a third-party enters a room, stop displaying the ToS and privacy links in the Loop panel
+- Bug 1000269 - Part 1: Reconfigure l10n directory structure for Loop standalone
+- Bug 1088650 - Add sounds for notifications when rooms are joined, left or if there are failures
+- Bug 1094137 - Create a common shared store creator for Loop
+- Bug 1101006 - Refactor mozLoop.{get, set}LoopCharPref and mozLoop.{get, set}LoopBoolPref to mozLoop.{get, set}Pref that uses getPrefType
+- Bug 1096229 - Adjust Loop server urls to include /v0 to avoid potential redirects
+- Bug 1059756 - Add a link to Loop's help page in the gear menu
+- Bug 1097746 - Add a link to Hello's SUMO page for standalone
+- Bug 1076754 - Moved Loop feedback flow to Flux
+- Bug 1093787 - Insert an additional view for Loop standalone calls to prompt the user to accept the microphone and camera permissions before starting the call
+- Bug 1097742 - Part 2 Standalone Rooms shouldn't join the room until after user media has been accepted
+- Bug 1097749 - Standalone rooms should display the room name once the room has been joined
+- Bug 1105347 - If something goes wrong in a Loop room, ensure that devices are released and the room is left fully
+- Bug 1079225 - Feedback form displayed for Loop standalone rooms
+
+Config changes:
+- Added loop.config.roomsSupportUrl
+- Added loop.config.guestSupportUrl
+- Changed default loop.config.serverUrl
+
 0.10.0 (2014-11-14)
 -------------------
 - Bug 1033579 - Add channel to POST calls for Loop to allow different servers based on the channel
