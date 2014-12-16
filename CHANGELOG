@@ -3,6 +3,25 @@ Changelog
 
 This document describes changes between each past release.
 
+0.12.0 (2014-12-16)
+-------------------
+
+- Bug 1098540 - Muting local video should display the default avatar image in Loop Rooms
+- Bug 1100378 - Retry button for Hello standalone
+- Bug 1105698 - Fixed brief flickering of feedback form in Loop standalone
+- Bug 1105809 - Centered feedback form in Loop standalone ended room conversation view
+- Bug 1105802 - Added beta tag to standalone room layout
+- Bug 1045498 - New Hello UX for non supported browsers
+- Bug 1101378 - self-image can be cropped, meaning the user doesn't see the entire sent images
+- Bug 1097743 - Improved Loop standalone UI/X on smaller screens
+- Bug 1097862 - Perform the leave notification to the loop-server in a synchronous fashion to give the notification more change of succeeding
+- Bug 1109325 - Change the help url for Hello's standalone rooms
+- Bug 1112067 - Quieten the output of extract_from_hg.py in loop-client
+- Bug 1000269 - Initial import of locales for L10n
+
+Config changes:
+- Added loop.config.generalSupportUrl
+
 0.11.2 (2014-11-27)
 -------------------
 
