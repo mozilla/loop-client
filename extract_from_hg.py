@@ -149,7 +149,7 @@ def pullHg(hgRepo, hgUI):
 
 
 def pullGit(branch):
-    runCommand(['git', 'pull', '--ff-only', 'origin', branch])
+    runCommand(['git', 'pull', '-q', '--ff-only', 'origin', branch])
 
 
 def pushGit(branch):
