@@ -87,6 +87,7 @@ def runCommand(cmd):
     p = subprocess.Popen(cmd)
     result = p.wait()
     if result != 0:
+        print >> sys.stderr, "FAIL: Unable to run %s, exit code: %d" % (cmd, result)
         sys.exit(result)
 
 
@@ -176,11 +177,6 @@ def main():
     firstRevText = lastestRevFile.read().strip()
     lastestRevFile.close()
 
-    print "Starting at %s" % (firstRevText)
-
-    # Last revision to check to.
-    lastRevText = "default"
-
     # Open the Mercurial repo...
     hgUI = ui.ui()
     hgRepo = hg.repository(hgUI, M_C_SOURCE_REPO)
@@ -188,13 +184,12 @@ def main():
     pullHg(hgRepo, hgUI)
 
     committedFiles = False
-    print firstRevText
-    print lastRevText
-    firstRev = hgRepo[firstRevText].rev()
-    lastRev = hgRepo[lastRevText].rev()
+    firstRev = hgRepo[firstRevText].rev() + 1
+
+    print "Starting at %s" % (hgRepo[firstRev].hex())
 
     # Now work through any new changesets
-    for i in xrange(firstRev, lastRev):
+    for i in xrange(firstRev, len(hgRepo)):
         cset = hgRepo[i]
 
         # Use the very last cset, not the one that affects loop,
@@ -221,14 +216,12 @@ def main():
             commitCset(cset)
             committedFiles = True
 
-    # Only bother committing if we're updated the files.
-    # In theory we shouldn't need to commit anyway, but it
-    # may be a useful check
+    # Only bother committing and pushing if we've updated the files.
     if committedFiles:
         writeLatestRev(lastCset)
 
-    if args.push_result:
-        pushGit(gitRepo.active_branch.name)
+        if args.push_result:
+            pushGit(gitRepo.active_branch.name)
 
 if __name__ == "__main__":
     main()
