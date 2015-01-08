@@ -76,7 +76,7 @@ loop.shared.views.FeedbackView = (function(l10n) {
         video_quality: l10n.get("feedback_category_video_quality"),
         disconnected : l10n.get("feedback_category_was_disconnected"),
         confusing:     l10n.get("feedback_category_confusing"),
-        other:         l10n.get("feedback_category_other2")
+        other:         l10n.get("feedback_category_other")
       };
     },
 
