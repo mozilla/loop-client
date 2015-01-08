@@ -3,6 +3,25 @@ Changelog
 
 This document describes changes between each past release.
 
+0.13.0 (2015-01-08)
+-------------------
+
+- Bug 1109032 - Fix initiating calls on FxOS so audio only calls from received links work
+- Bug 1097703 - Enable install/open FxOS Loop client from standalone UI for ROOM
+- Bug 1112021 - Remove drop shadows on Loop video elements
+- Bug 1105708 - More l10n compliant buttons for Loop
+- Bug 1114952 - Loop client extraction script fails to process all changesets on a merge cset (sometimes getting stuck), and is still a bit verbose for errors on no-issue changes
+- Bug 1112264 - Hide loop self-view with message if it would be incompletely shown
+- Bug 1109849 - Bypass the feedback form if no-one has entered the room yet
+- Bug 1000085 - panel.css and contacts.css should move to a non-shared directory
+- Bug 1096399 - Upgrade React to 0.12.2
+- Bug 1118246 - Loop should handle forceDisconnect events from the OT sdk
+- Bug 1079227 - Loop feedback form should always allow comments
+- Bug 1117863 - Correct Loop's language fallback to use all of accept languages properly
+
+Config changes:
+- Added loop.config.fxosApp.rooms
+
 0.12.0 (2014-12-16)
 -------------------
 
