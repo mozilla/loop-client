@@ -3,6 +3,13 @@ Changelog
 
 This document describes changes between each past release.
 
+0.13.2 (2015-01-13)
+-------------------
+
+- Bug 1119485 - Link clicker UI no longer resets to the stat conversation view after giving feedback
+- Bug 1000269 - Add python script to move locale files into the loop-client tree
+- Update L10n to latest versions
+
 0.13.1 (2015-01-08)
 -------------------
 
