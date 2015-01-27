@@ -3,6 +3,15 @@ Changelog
 
 This document describes changes between each past release.
 
+0.13.3 (2015-01-27)
+-------------------
+
+- Bug 974904 - Add Google Analytics snippet for Hello link-clicker side
+- Bug 1119765 - Joining and Leaving a Loop room quickly can leave the room as full
+- Bug 1097852 - Add support for IE10 to l10n-gaia
+- Bug 1122486 - Upgrade Loop's use of Tokbox SDK 2.2.9.7 to fix issues with calls and rooms intermitently failing to connect
+- Update L10n to latest versions
+
 0.13.2 (2015-01-13)
 -------------------
 
