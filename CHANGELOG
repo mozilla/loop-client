@@ -3,6 +3,20 @@ Changelog
 
 This document describes changes between each past release.
 
+0.13.4 (2015-02-04)
+-------------------
+
+- Bug 1104930 - Create a mixin for handling updating of the video container for various Loop conversation views
+- Bug 1120003 - Hoist Loop REST errnos and websocket reasons
+- Bug 1106852 - Introducing StoreMixin for Loop
+- Bug 1093780 Part 1 - Update OpenTok library to v2.4.0 for Loop
+- Bug 1093780 Part 2 - Add support for using 'contain' mode for all video streams Loop publishes and resize/ position the elements based on their aspect ratio
+- Bug 1093780 Part 3 - add tests for contain mode functionality in the MediaSetup mixin
+- Bug 1093780 Part 4 - Fix the audio-only display of avatars for the new sdk
+- Bug 1128471 - Link-clicker fails to work for FxOS standalone room joins (TypeError: newDimensions is not an object)
+- Bug 1122032 Part 1 - Setup minimal screen sharing for Loop from desktop (disabled by default)
+- Bug 1122032 Part 2 - Show the Loop screenshare video in place of the remote video for now
+
 0.13.3 (2015-01-27)
 -------------------
 
