@@ -3,6 +3,61 @@ Changelog
 
 This document describes changes between each past release.
 
+0.13.4 (2015-02-04)
+-------------------
+
+- Bug 1104930 - Create a mixin for handling updating of the video container for various Loop conversation views
+- Bug 1120003 - Hoist Loop REST errnos and websocket reasons
+- Bug 1106852 - Introducing StoreMixin for Loop
+- Bug 1093780 Part 1 - Update OpenTok library to v2.4.0 for Loop
+- Bug 1093780 Part 2 - Add support for using 'contain' mode for all video streams Loop publishes and resize/ position the elements based on their aspect ratio
+- Bug 1093780 Part 3 - add tests for contain mode functionality in the MediaSetup mixin
+- Bug 1093780 Part 4 - Fix the audio-only display of avatars for the new sdk
+- Bug 1128471 - Link-clicker fails to work for FxOS standalone room joins (TypeError: newDimensions is not an object)
+- Bug 1122032 Part 1 - Setup minimal screen sharing for Loop from desktop (disabled by default)
+- Bug 1122032 Part 2 - Show the Loop screenshare video in place of the remote video for now
+
+0.13.3 (2015-01-27)
+-------------------
+
+- Bug 974904 - Add Google Analytics snippet for Hello link-clicker side
+- Bug 1119765 - Joining and Leaving a Loop room quickly can leave the room as full
+- Bug 1097852 - Add support for IE10 to l10n-gaia
+- Bug 1122486 - Upgrade Loop's use of Tokbox SDK 2.2.9.7 to fix issues with calls and rooms intermitently failing to connect
+- Update L10n to latest versions
+
+0.13.2 (2015-01-13)
+-------------------
+
+- Bug 1119485 - Link clicker UI no longer resets to the stat conversation view after giving feedback
+- Bug 1000269 - Add python script to move locale files into the loop-client tree
+- Update L10n to latest versions
+
+0.13.1 (2015-01-08)
+-------------------
+
+- Backout string change from bug 1079227
+- Update L10n to latest versions
+
+0.13.0 (2015-01-08)
+-------------------
+
+- Bug 1109032 - Fix initiating calls on FxOS so audio only calls from received links work
+- Bug 1097703 - Enable install/open FxOS Loop client from standalone UI for ROOM
+- Bug 1112021 - Remove drop shadows on Loop video elements
+- Bug 1105708 - More l10n compliant buttons for Loop
+- Bug 1114952 - Loop client extraction script fails to process all changesets on a merge cset (sometimes getting stuck), and is still a bit verbose for errors on no-issue changes
+- Bug 1112264 - Hide loop self-view with message if it would be incompletely shown
+- Bug 1109849 - Bypass the feedback form if no-one has entered the room yet
+- Bug 1000085 - panel.css and contacts.css should move to a non-shared directory
+- Bug 1096399 - Upgrade React to 0.12.2
+- Bug 1118246 - Loop should handle forceDisconnect events from the OT sdk
+- Bug 1079227 - Loop feedback form should always allow comments
+- Bug 1117863 - Correct Loop's language fallback to use all of accept languages properly
+
+Config changes:
+- Added loop.config.fxosApp.rooms
+
 0.12.0 (2014-12-16)
 -------------------
 
