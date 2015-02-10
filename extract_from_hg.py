@@ -22,6 +22,7 @@ from datetime import datetime
 import subprocess
 import dateutil
 import dateutil.tz
+import re
 from mercurial import hg, ui, commands
 # We use gitpython for the repository branch. I was hoping to use it for
 # more, but unfortunately gitpython doesn't seem to want
@@ -43,6 +44,10 @@ def interestingFilename(filename):
             filename.startswith("browser/components/loop/test/shared"))
 
 
+def isIndexFile(filename):
+    return filename == "browser/components/loop/standalone/content/index.html"
+
+
 # This is how we map files from mozilla-central to loop-client repo
 def updatePathsFor(filename):
     filename = filename.replace("browser/components/loop/standalone/", "")
@@ -55,27 +60,74 @@ def updatePathsFor(filename):
     return filename
 
 
+def preserveLocaleData(filename, fileData):
+    """
+    Preserves locale data for an index file.
+
+    Keyword arguments:
+    filename -- the filename of the original file
+    fileData -- the new file data being written
+    """
+    oldFile = open(filename, "r")
+    oldFileData = oldFile.read()
+    oldFile.close()
+
+    localeList = re.search(r"""
+      <meta                          # Match tag name
+        \s*                          # Any number of spaces
+        name=(["'])locales\1.*?      # Match name="locales" (either kind of quote)
+        \s*                          # Any number of spaces
+        content=(["'])               # Match content attribute
+          (.*?)                      # The locale information we want
+          \2.*?                      # End quote of content attribute
+        \s*                          # Any number of spaces
+       />
+    """, oldFileData, re.VERBOSE).group(3)
+
+    # This will overwrite any other attributes, but we only expect these
+    # so that should be fine.
+    newFileData = re.sub(r"""
+      <meta                        # Match tag name
+        \s*                        # Any number of spaces
+        name=(["'])locales\1.*?    # Match name="locales" (either kind of quote)
+        \s*                        # Any number of spaces
+        content=(["']).*?\2.*?     # Match content="<anything>" attribute
+        \s*                        # Any number of spaces
+       />
+    """,
+        '<meta name="locales" content="' + "".join(localeList) + '" />',
+        fileData, 1, re.MULTILINE | re.DOTALL | re.VERBOSE)
+
+    return newFileData
+
+
 def testFileNeedsUpdatedPaths(filename):
     return (filename == "test/standalone/index.html" or
             filename == "test/shared/index.html")
 
 
-def updatePathsInTestFile(filename, fileContext):
+def updatePathsInTestFile(filename, fileData):
     print "Translating %s" % filename
-    return fileContext.data().replace('src="../../standalone/', 'src="../../')
+    return fileData.replace('src="../../standalone/', 'src="../../')
 
 
-# Write a file out to disk, fileContext is the hg file context.
-def writeFile(filename, fileContext):
+def writeFile(filename, fileData):
+    """
+    Write a file out to disk
+
+    Keyword arguments:
+    filename -- the filename to write
+    fileData -- text file content
+    """
     directory = os.path.dirname(filename)
     if directory and not os.path.isdir(directory):
         os.makedirs(directory)
 
     outFile = open(filename, "w")
     if testFileNeedsUpdatedPaths(filename):
-        outFile.write(updatePathsInTestFile(filename, fileContext))
+        outFile.write(updatePathsInTestFile(filename, fileData))
     else:
-        outFile.write(fileContext.data())
+        outFile.write(fileData)
     outFile.close()
 
 
@@ -109,12 +161,18 @@ def writeCset(cset):
         if interestingFilename(filename):
             newFilename = updatePathsFor(filename)
             try:
-                fileData = cset[filename]
+                fileContext = cset[filename]
             except:
                 # print "Deleting file %s" % (filename)
                 deleteFile(newFilename)
                 gitRemove(newFilename)
             else:
+                fileData = fileContext.data()
+
+                # For the index file, we preserve the locale data in the file.
+                if isIndexFile(filename):
+                    fileData = preserveLocaleData(newFilename, fileData)
+
                 # print "Writing %s to %s" % (filename, newFilename)
                 writeFile(newFilename, fileData)
                 gitAdd(newFilename)
