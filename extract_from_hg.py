@@ -32,8 +32,9 @@ from mercurial import hg, ui, commands
 from git import Repo
 
 LATEST_REV_FILE = "last_m_c_import_rev.txt"
-M_C_SOURCE_URL = "http://hg.mozilla.org/mozilla-central/"
-M_C_SOURCE_REPO = "../mozilla-central"
+DEFAULT_SOURCE_REPO = "http://hg.mozilla.org/mozilla-central/"
+DEFAULT_SOURCE_CLONE = "../mozilla-central"
+DEFAULT_SOURCE_BRANCH = "default"
 
 
 # Is this interesting to Loop?
@@ -199,12 +200,12 @@ def writeLatestRev(cset):
     runCommand(['git', 'commit', '-m', 'update latest merged cset file'])
 
 
-def pullHg(hgRepo, hgUI):
+def pullHg(hgRepo, hgUI, sourceURL, sourceBranch):
     # And update it
-    if commands.incoming(hgUI, hgRepo, source=M_C_SOURCE_URL, bundle=None,
+    if commands.incoming(hgUI, hgRepo, source=sourceURL, bundle=None,
                          force=None) == 0:
-        commands.pull(hgUI, hgRepo, source=M_C_SOURCE_URL)
-        commands.update(hgUI, hgRepo, rev='default')
+        commands.pull(hgUI, hgRepo, source=sourceURL)
+        commands.update(hgUI, hgRepo, rev=sourceBranch)
 
 
 def pullGit(branch):
@@ -220,6 +221,21 @@ def main():
     parser.add_argument('--push-result', dest='push_result',
                         action='store_true', default=False,
                         help='Push the result of the extraction')
+    parser.add_argument('--source-repo', dest='source_repo',
+                        action='store', default=DEFAULT_SOURCE_REPO,
+                        help='Hg source repository (default: %s)' % DEFAULT_SOURCE_REPO)
+    parser.add_argument('--source-clone', dest='source_clone',
+                        action='store', default=DEFAULT_SOURCE_CLONE,
+                        help='Hg clone repository location (default: %s)' % DEFAULT_SOURCE_CLONE)
+    parser.add_argument('--source-branch', dest='source_branch',
+                        action='store', default=DEFAULT_SOURCE_BRANCH,
+                        help='Hg default source branch (default: %s)' % DEFAULT_SOURCE_BRANCH)
+    parser.add_argument('--skip-pull-git', dest='pull_git',
+                        action='store_false', default=True,
+                        help='Skips pulling the git repo. Useful for local testing or if on branches')
+    parser.add_argument('--skip-pull-hg', dest='pull_hg',
+                        action='store_false', default=True,
+                        help='Skips pulling the hg repo. Useful for local testing.')
 
     args = parser.parse_args()
 
@@ -228,7 +244,8 @@ def main():
     assert gitRepo.bare is False
     assert gitRepo.is_dirty() is False
 
-    pullGit(gitRepo.active_branch.name)
+    if args.pull_git:
+        pullGit(gitRepo.active_branch.name)
 
     # Find out the last revision we checked against
     lastestRevFile = open(LATEST_REV_FILE, "r")
@@ -237,9 +254,10 @@ def main():
 
     # Open the Mercurial repo...
     hgUI = ui.ui()
-    hgRepo = hg.repository(hgUI, M_C_SOURCE_REPO)
+    hgRepo = hg.repository(hgUI, args.source_clone)
 
-    pullHg(hgRepo, hgUI)
+    if args.pull_hg:
+        pullHg(hgRepo, hgUI, args.source_repo, args.source_branch)
 
     committedFiles = False
     firstRev = hgRepo[firstRevText].rev() + 1
