@@ -3,6 +3,23 @@ Changelog
 
 This document describes changes between each past release.
 
+0.14.0 (2015-02-20)
+-------------------
+
+- Bug 1079216 - Improve some strings on the Loop feedback form
+- Bug 1098355 - Change the functions in Loop's shared.utils.Helper to be accessible from the global state and avoid passing the helper down through the component props tree
+- Bug 1045495 - Loop's link clicker UI needs new UX for notification of non supported platform
+- Bug 1131688 - In the standalone view the conversation window we're currently overlaying the toolbar on top of the remote video
+- Bug 1132064 - Local video is sometimes displayed in the wrong location on the standalone Loop UI
+- Bug 1132882 - Slave the local video size to the remote video width on the Loop standalone UI
+- Bug 1126321 - Loop Standalone should display both of the remote video and screen when screen sharing is active
+- Update L10n to latest versions
+
+0.13.5 (2015-02-09)
+-------------------
+
+- Bug 1129507 - Honor DNT for Loop analytics
+
 0.13.4 (2015-02-04)
 -------------------
 
