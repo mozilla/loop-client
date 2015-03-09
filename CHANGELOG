@@ -3,6 +3,15 @@ Changelog
 
 This document describes changes between each past release.
 
+0.15.0 (2015-03-09)
+-------------------
+
+- Bug 1047040 - Add browser-specific graphic of GUM prompt to the media-wait message
+- Bug 1131550 - Loop-client extraction script should preserve locale information when importing m-c changes
+- Bug 1135133 - Loop-client extraction script should support pulling from different repositories/branches
+- Bug 1137469 - If an uncaught exception occurs whilst processing an action, the dispatcher can fail, rendering parts of Loop inactive
+- Bug 1131568 - Update the OpenTok SDK to version 2.5.0
+
 0.14.0 (2015-02-20)
 -------------------
 
