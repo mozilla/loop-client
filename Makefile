@@ -22,7 +22,7 @@ LOOP_PRODUCT_HOMEPAGE_URL := $(shell echo $${LOOP_PRODUCT_HOMEPAGE_URL-"https://
 
 NODE_LOCAL_BIN=./node_modules/.bin
 
-install: npm_install tos
+install: npm_install
 
 npm_install:
 	@npm install
