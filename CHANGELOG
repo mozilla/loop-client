@@ -3,6 +3,20 @@ Changelog
 
 This document describes changes between each past release.
 
+0.16.0 (2015-04-08)
+-------------------
+
+- Bug 1141128 - add a margin of 10px to the left side of the remote video stream in the Loop standalone client
+- Bug 1141133 - Implement encrypt/decrypt of context information ready for Loop's context in conversation work
+- Bug 1137843 - Loop client should not try to leave room that it fails to join
+- Bug 1146929 - Remove support for the old style call hash based urls from the Loop standalone UI
+- Bug 1114563 - Show the room name before the user enters the room
+- Bug 1132301 - Part 3 - hide the Loop dropdowns when the content window loses focus, so mouseLeave workarounds can be removed
+- Bug 1105490 - Remove old ToS generation code from Loop Standalone
+- Bug 1147609 - Make Loop's standalone UI work with roomName as an unencrypted parameter or as an encrypted part of context
+- Bug 1146834 - use Uint8Array's subarray when slice is not available in Loop content pages
+
+
 0.15.0 (2015-03-09)
 -------------------
 
