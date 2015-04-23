@@ -3,7 +3,7 @@ Changelog
 
 This document describes changes between each past release.
 
-0.16.0 (2015-04-08)
+0.16.0 (TBD)
 -------------------
 
 - Bug 1141128 - add a margin of 10px to the left side of the remote video stream in the Loop standalone client
@@ -15,7 +15,24 @@ This document describes changes between each past release.
 - Bug 1105490 - Remove old ToS generation code from Loop Standalone
 - Bug 1147609 - Make Loop's standalone UI work with roomName as an unencrypted parameter or as an encrypted part of context
 - Bug 1146834 - use Uint8Array's subarray when slice is not available in Loop content pages
+- Bug 1150273 - Use eslint for the react files for Loop
+- Bug 1152296 - Move roomStore.js from shared code to desktop specific code for Loop
+- Bug 1136797 - For Loop standalone rename the brand website url to download firefox url and update the default
+- Bug 1132301 - Part 3 hide the Loop dropdowns when the content window loses focus, so mouseLeave workarounds can be removed
+- Bug 1142522 - Part 1 Share utils and crypto content modules with chrome as well
+- Bug 1142522 - Part 2 Hook up encryption for room contexts in guest mode
+- Bug 1153418 - Fix an issue on Loop's standalone where the remote and video alignment during screenshare is 10px out
+- Bug 1142588 - Implement context in conversations display for Loop's standalone UI
+- Bug 1155036 - Standalone display is unusable at 640x500
+- Bug 1154862 - Add forgotten param to VideoDimensionsChanged action
+- Bug 1154868 - Log exceptions in bufferedUpdateVideo callbacks
+- Bug 1155561 - ignore body clicks on dropdown menu buttons, to make dropdowns in Loop windows toggle properly
+- Bug 1079697 - Remove obsolete jshint messages in Loop code
+- Bug 1132222 - Add more metrics reporting to the Loop standalone UI
 
+Config changes:
+- Added loop.config.downloadFirefoxUrl
+- Removed loop.config.brandWebsiteUrl
 
 0.15.0 (2015-03-09)
 -------------------
