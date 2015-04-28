@@ -29,6 +29,8 @@ This document describes changes between each past release.
 - Bug 1155561 - ignore body clicks on dropdown menu buttons, to make dropdowns in Loop windows toggle properly
 - Bug 1079697 - Remove obsolete jshint messages in Loop code
 - Bug 1132222 - Add more metrics reporting to the Loop standalone UI
+- Bug 1156201 - Reset the video dimensions cache when in initial room states to avoid issues with not correctly displaying video streams when a room is re-entered
+- Update L10n to latest versions
 
 Config changes:
 - Added loop.config.downloadFirefoxUrl
