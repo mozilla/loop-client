@@ -3,7 +3,7 @@ Changelog
 
 This document describes changes between each past release.
 
-0.16.0 (TBD)
+0.16.0 (2015-04-28)
 -------------------
 
 - Bug 1141128 - add a margin of 10px to the left side of the remote video stream in the Loop standalone client
@@ -30,6 +30,8 @@ This document describes changes between each past release.
 - Bug 1079697 - Remove obsolete jshint messages in Loop code
 - Bug 1132222 - Add more metrics reporting to the Loop standalone UI
 - Bug 1156201 - Reset the video dimensions cache when in initial room states to avoid issues with not correctly displaying video streams when a room is re-entered
+- Bug 1137813 - Add room connection status logging
+- Bug 1158800 - Don't show errors for context in conversations on the standalone UI as they may force the user into an unnecessary re-obtaining of the URL
 - Update L10n to latest versions
 
 Config changes:
