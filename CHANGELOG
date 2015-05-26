@@ -3,6 +3,26 @@ Changelog
 
 This document describes changes between each past release.
 
+TBD (TBD)
+-------------------
+
+- Bug 1158112 - Move the Loop modules into a sub-directory and prepare eslint for enabling more rules for Loop.
+- Bug 1146305 - IDN links should be properly displayed in Hello rooms for context in conversations.
+- Bug 1128979 - Improve usability of loop-client test server - allow tests to be loaded when in the github context; also allow the full server url to be specified, not just the port.
+- Bug 1160487 - Enable eslint rules for Loop: semi-colon related.
+- Bug 1160489 - Enable eslint rules for Loop: comma related.
+- Bug 1161926 - Standalone UI doesn't always show 'Something went wrong' if the network connection dies. Upgrade jquery due to not always properly catching errors from $.ajax.
+- Bug 1160496 - Enable eslint rules for Loop: General code format.
+- Bug 1118983 - Mozilla logo at bottom of Loop Standalone UI is incorrect.
+- Bug 1154775 - Upgrade OpenTok library to v2.5.1.
+- Bug 1165266 - Upgrade Loop's use of eslint to version 0.21.x and eslint-react-plugin to 2.3.x and enable no-undef rule.
+- Bug 1166720 - Gather some more metrics about where Loop link-clickers don't manage to get all the way to a connected conversation.
+- Bug 1160501 - Enable eslint rules for Loop: quote related issues.
+- Bug 1118523 - Don't show the window will close message on the feedback received view on the Loop standalone UI.
+- Bug 1162991 - Implement an initial layer of text chat for Loop conversations.
+- Bug 1160771 - Clean unnecessary tags and properties from SVG files in browser/ and toolkit/
+- Bug 1155170 - Add favicon to Hello link clicker page.
+
 0.16.0 (2015-04-28)
 -------------------
 
