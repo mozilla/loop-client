@@ -3,6 +3,11 @@ Changelog
 
 This document describes changes between each past release.
 
+0.17.1 (2015-05-28)
+-------------------
+
+- Bug 1151528 - Add optimizely to Loop standalone for research and optimization purposes. Also tidy up some of the in-line javascript in the index page.
+
 0.17.0 (2015-05-27)
 -------------------
 
