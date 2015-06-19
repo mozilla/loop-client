@@ -3,6 +3,27 @@ Changelog
 
 This document describes changes between each past release.
 
+0.18.0 (2015-06-19)
+-------------------
+
+- Bug 1165281 - Fix Loop key-spacing ESlint rules.
+- Bug 1165281 - Fix Loop no-spaced-func ESlint rules.
+- Bug 1141296 - make Loop use its own markup, not the SDK's.
+- Bug 1173036 - Change Loop's RTL attributes to be consistently set on the html element.
+- Bug 1119000 - Improve the layout of Loop's standalone footer - reduce the height it takes up.
+- Bug 1164510 - show a globe favicon as default when no favicon can be found for a Hello context in conversation.
+- Bug 1174714 - Part 1. Drop obsolete box shadows in Loop's css.
+- Bug 1174714 - Part 2. Display the room name at the start of the text chat view in the Loop Standalone UI.
+- Bug 1174714 - Part 3. Display room context information in the Loop standalone UI text chat area.
+- Bug 1174945 - Enable eslint rule for no-shadow.
+- Bug 1168829 - Part 1. Remove Loop's standalone UI old dynamic layout and context views.
+- Bug 1168829 - Part 2. Adjust Loop's Standalone UI to include text chat for conversations.
+- Bug 1168829 - Part 3. Fix some RTL issues associated with the new layout for Loop's text-chat.
+- Bug 1175825 - Fix text chat room name display when no room name is available (due to crypto failure) and fix a mozL10n warning on Loop desktop.
+- Bug 1168851 - Text chat should be disabled when the other participant leaves the room.
+- Bug 1169385 - Add referrer controls for Loop standalone page.
+- Bug 1171933 - Reimplement spinners that Hello lost after markdown extraction.
+
 0.17.2 (2015-06-01)
 -------------------
 
