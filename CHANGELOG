@@ -24,6 +24,7 @@ This document describes changes between each past release.
 - Bug 1169385 - Add referrer controls for Loop standalone page.
 - Bug 1171933 - Reimplement spinners that Hello lost after markdown extraction.
 - (no bug) - Drop L10n wrapping of the conversation name for 0.18.0 release as L10n haven't had time to translate yet.
+- Bug 1176241 - Stop scrollbars being shown all the time on Loop's text chat areas.
 
 0.17.2 (2015-06-01)
 -------------------
