@@ -3,7 +3,12 @@ Changelog
 
 This document describes changes between each past release.
 
-TBD (TBD)
+0.17.1 (2015-05-28)
+-------------------
+
+- Bug 1151528 - Add optimizely to Loop standalone for research and optimization purposes. Also tidy up some of the in-line javascript in the index page.
+
+0.17.0 (2015-05-27)
 -------------------
 
 - Bug 1158112 - Move the Loop modules into a sub-directory and prepare eslint for enabling more rules for Loop.
@@ -22,6 +27,9 @@ TBD (TBD)
 - Bug 1162991 - Implement an initial layer of text chat for Loop conversations.
 - Bug 1160771 - Clean unnecessary tags and properties from SVG files in browser/ and toolkit/
 - Bug 1155170 - Add favicon to Hello link clicker page.
+- Bug 1168366 - Loop Link-clicker: Joining a room, giving feedback, looses context information until the page is reloaded.
+- Bug 1168788 - Check for devices should check for audio or video not just audio.
+- L10 updates
 
 0.16.0 (2015-04-28)
 -------------------
