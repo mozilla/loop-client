@@ -3,6 +3,13 @@ Changelog
 
 This document describes changes between each past release.
 
+0.17.2 (2015-06-01)
+-------------------
+
+- Bug 1169706 - Link-clicker UI broken for release builds (38 & earlier) - Join doesn't work (TypeError: rootNavigator.mediaDevices.enumerateDevices is not a function).
+- Bug 1169908 - Add a robots.txt for Loop's standalone UI.
+- Bug 1170051 - Fix issues with screen shares not correctly laying out on Loop standalone UI - remove the video dimensions from the cache when the share is stopped.
+
 0.17.1 (2015-05-28)
 -------------------
 
