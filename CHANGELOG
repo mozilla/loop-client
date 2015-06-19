@@ -23,6 +23,7 @@ This document describes changes between each past release.
 - Bug 1168851 - Text chat should be disabled when the other participant leaves the room.
 - Bug 1169385 - Add referrer controls for Loop standalone page.
 - Bug 1171933 - Reimplement spinners that Hello lost after markdown extraction.
+- (no bug) - Drop L10n wrapping of the conversation name for 0.18.0 release as L10n haven't had time to translate yet.
 
 0.17.2 (2015-06-01)
 -------------------
