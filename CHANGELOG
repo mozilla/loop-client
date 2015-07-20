@@ -3,6 +3,30 @@ Changelog
 
 This document describes changes between each past release.
 
+TBD
+-------------------
+
+- Bug 1176277 - Loop's text chat entries view should take up the whole height of the text chat view, when the input box isn't shown.
+- Bug 1168848 - Make TextChat style correctly when focussed.
+- Bug 1176278 - Long strings in Loop's text chat cause the chat area to be horizontally scrollable.
+- Bug 1176778 - Enable jsx-sort-props eslint rule for Loop.
+- Bug 1176780 - Enable jsx-sort-props-types eslint rule for Loop.
+- Bug 1176933 - Enable missing props validation elint rule checking for Loop.
+- Bug 1171949 - Play a sound when a chat message is received for Loop.
+- Bug 1168841 - Style text chat elements and add timestamps.
+- Bug 1177954 - Log sdk failure events to the server during Loop room activity.
+- Bug 1173582 - no longer need to ship/load SDK CSS & related assets.
+- Bug 1176774 - Upgrade Loop's test libraries to latest versions.
+- Bug 1178270 - Upgrade Loop's use of eslint to the latest (0.24) and upgrade the eslint-plugin-react version (0.6.2).
+- Bug 1180671 - Rename 'l10n' to 'mozL10n' in Loop's views.jsx to be more consistent with uses elsewhere.
+- Bug 1110937 - Make Loop's link-clicker show the expired/invalid failure view before the user clicks join.
+- Bug 1181239 - Enable eslint 'use strict' function rule for Loop's content code.
+- Bug 1180179 - Part 1. Adjust standalone layout ready for a central media layout component.
+- Bug 1178391 - Fix all warnings in Loop shared test suite.
+- Bug 1180603 - Text inside text bubbles should always be aligned according to the text direction.
+- Bug 1183576 - Update chat styles.
+
+
 0.18.0 (2015-06-19)
 -------------------
 
