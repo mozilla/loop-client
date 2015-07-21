@@ -25,7 +25,9 @@ TBD
 - Bug 1178391 - Fix all warnings in Loop shared test suite.
 - Bug 1180603 - Text inside text bubbles should always be aligned according to the text direction.
 - Bug 1183576 - Update chat styles.
-
+- Bug 1182070 - Fix the layout of the text chat entries view on Loop's standalone UI when no entries are displayed.
+- Bug 1185454 - Fix eslint issue for Loop revealed in eslint 0.24.1, and upgrade the react plugin for eslint version to 2.7.1
+- Bug 1185465 - Improve doNotTrack checking documentation for Loop's standalone page.
 
 0.18.0 (2015-06-19)
 -------------------
