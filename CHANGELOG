@@ -3,7 +3,7 @@ Changelog
 
 This document describes changes between each past release.
 
-TBD
+0.19.0 (2015-07-21)
 -------------------
 
 - Bug 1176277 - Loop's text chat entries view should take up the whole height of the text chat view, when the input box isn't shown.
@@ -28,6 +28,8 @@ TBD
 - Bug 1182070 - Fix the layout of the text chat entries view on Loop's standalone UI when no entries are displayed.
 - Bug 1185454 - Fix eslint issue for Loop revealed in eslint 0.24.1, and upgrade the react plugin for eslint version to 2.7.1
 - Bug 1185465 - Improve doNotTrack checking documentation for Loop's standalone page.
+- Bug 1183187 - Aspect ratio of favicon in room context is sometimes wrong on the Loop standalone client.
+- L10n updates
 
 0.18.0 (2015-06-19)
 -------------------
