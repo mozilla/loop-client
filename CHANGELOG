@@ -3,6 +3,26 @@ Changelog
 
 This document describes changes between each past release.
 
+TBD
+-------------------
+
+- Bug 1171415 - Implement NPS feedback for for Loop.
+- Bug 1180700 - Fix wrapping of context information when comments field contains a long word.
+- Bug 1180179 - Part 2. Create a new shared media layout component.
+- Bug 1181825 - Enable eslint rules for Loop: no-extra-boolean cast, no-redeclare.
+- Bug 1186541 - Fix a warning in StandaloneRoomView.shouldRenderRemoteVideo when the roomState is gather.
+- Bug 1180179 - Part 3. Use the shared media layout component in direct calls.
+- Bug 1180179 - Part 3.1. Fix ui-showcase screen share standalone room views.
+- Bug 1180179 - Part 4. Use the shared media layout component in Loop's room views.
+- Bug 1125181 - Hello should put the conversation (aka room) name in the <title>.
+- Bug 1188547 - Small screen view stretches media prompt background.
+- Bug 1183649 - Implement the refreshed design for the 'Start a new conversation' button.
+- Bug 1176280 - make links in Hello chat clickable.
+- Bug 1155402 - Change Loop's standalone prompt for gUM to align with Chrome 44 changes.
+- Bug 1190293 - Upgrade Loop's use of eslint to 1.0.x and the eslint-plugin-react to 3.2.x.
+- Bug 1181987 - Display a tile when the link clicker is waiting alone in a conversation.
+- Bug 1183636 - Implement refreshed design for Loop panel footer.
+
 0.19.0 (2015-07-21)
 -------------------
 
