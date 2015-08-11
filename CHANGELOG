@@ -16,12 +16,16 @@ TBD
 - Bug 1180179 - Part 4. Use the shared media layout component in Loop's room views.
 - Bug 1125181 - Hello should put the conversation (aka room) name in the <title>.
 - Bug 1188547 - Small screen view stretches media prompt background.
-- Bug 1183649 - Implement the refreshed design for the 'Start a new conversation' button.
 - Bug 1176280 - make links in Hello chat clickable.
 - Bug 1155402 - Change Loop's standalone prompt for gUM to align with Chrome 44 changes.
 - Bug 1190293 - Upgrade Loop's use of eslint to 1.0.x and the eslint-plugin-react to 3.2.x.
 - Bug 1181987 - Display a tile when the link clicker is waiting alone in a conversation.
 - Bug 1183636 - Implement refreshed design for Loop panel footer.
+- Reland bug 1180603 - Text inside text bubbles should always be aligned according to the text direction - which was mistakenly backed out by bug 1183576.
+
+Config changes:
+- Added loop.config.tilesIframeUrl
+- Added loop.config.tilesSupportUrl
 
 0.19.0 (2015-07-21)
 -------------------
