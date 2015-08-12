@@ -3,7 +3,7 @@ Changelog
 
 This document describes changes between each past release.
 
-TBD
+0.20.0 (2015-08-12)
 -------------------
 
 - Bug 1171415 - Implement NPS feedback for for Loop.
@@ -22,6 +22,10 @@ TBD
 - Bug 1181987 - Display a tile when the link clicker is waiting alone in a conversation.
 - Bug 1183636 - Implement refreshed design for Loop panel footer.
 - Reland bug 1180603 - Text inside text bubbles should always be aligned according to the text direction - which was mistakenly backed out by bug 1183576.
+- Bug 1191014 - Add google analytics event on tile clicks.
+- Bug 1171925 - Allow the entire area of Loop's context to be clicked; don't show hover effects in the panel.
+- Drop the hover background for context tiles introduced in bug 1171925 until we fix the rest of the colours.
+- Update L10n
 
 Config changes:
 - Added loop.config.tilesIframeUrl
