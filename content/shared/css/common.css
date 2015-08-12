@@ -560,10 +560,6 @@ html[dir="rtl"] .context-wrapper > .context-preview {
   clear: both;
 }
 
-.clicks-allowed.context-wrapper:hover {
-  background-color: #dbf7ff;
-}
-
 /* Only underline the url, not the associated text */
 .clicks-allowed.context-wrapper:hover > .context-info > .context-url {
   text-decoration: underline;
