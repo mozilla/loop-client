@@ -560,6 +560,13 @@ html[dir="rtl"] .context-wrapper > .context-preview {
   clear: both;
 }
 
+.clicks-allowed.context-wrapper:hover {
+  border: 2px solid #5cccee;
+  /* Due to the increased border width, reduce the padding accordingly so that
+     the text doesn't move. */
+  padding: calc(.8em - 1px);
+}
+
 /* Only underline the url, not the associated text */
 .clicks-allowed.context-wrapper:hover > .context-info > .context-url {
   text-decoration: underline;
