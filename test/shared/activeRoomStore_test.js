@@ -310,7 +310,6 @@ describe("loop.store.ActiveRoomStore", function () {
         decryptedContext: {
           roomName: "Monkeys"
         },
-        roomOwner: "Alfred",
         roomUrl: "http://invalid"
       };
 
@@ -354,7 +353,6 @@ describe("loop.store.ActiveRoomStore", function () {
             roomDescription: undefined,
             roomToken: fakeToken,
             roomName: fakeRoomData.decryptedContext.roomName,
-            roomOwner: fakeRoomData.roomOwner,
             roomUrl: fakeRoomData.roomUrl,
             socialShareProviders: []
           }));
@@ -428,7 +426,6 @@ describe("loop.store.ActiveRoomStore", function () {
 
     it("should dispatch an UpdateRoomInfo message with 'no data' failure if neither roomName nor context are supplied", function() {
       fakeMozLoop.rooms.get.callsArgWith(1, null, {
-        roomOwner: "Dan",
         roomUrl: "http://invalid"
       });
 
@@ -438,7 +435,6 @@ describe("loop.store.ActiveRoomStore", function () {
       sinon.assert.calledWithExactly(dispatcher.dispatch,
         new sharedActions.UpdateRoomInfo({
           roomInfoFailure: ROOM_INFO_FAILURES.NO_DATA,
-          roomOwner: "Dan",
           roomState: ROOM_STATES.READY,
           roomUrl: "http://invalid"
         }));
@@ -448,8 +444,7 @@ describe("loop.store.ActiveRoomStore", function () {
       it("should dispatch UpdateRoomInfo if mozLoop.rooms.get is successful", function() {
         var roomDetails = {
           roomName: "fakeName",
-          roomUrl: "http://invalid",
-          roomOwner: "gavin"
+          roomUrl: "http://invalid"
         };
 
         fakeMozLoop.rooms.get.callsArgWith(1, null, roomDetails);
@@ -472,12 +467,10 @@ describe("loop.store.ActiveRoomStore", function () {
           context: {
             value: "fakeContext"
           },
-          roomUrl: "http://invalid",
-          roomOwner: "Mark"
+          roomUrl: "http://invalid"
         };
         expectedDetails = {
-          roomUrl: "http://invalid",
-          roomOwner: "Mark"
+          roomUrl: "http://invalid"
         };
 
         fakeMozLoop.rooms.get.callsArgWith(1, null, roomDetails);
@@ -599,7 +592,6 @@ describe("loop.store.ActiveRoomStore", function () {
     beforeEach(function() {
       fakeRoomInfo = {
         roomName: "Its a room",
-        roomOwner: "Me",
         roomToken: "fakeToken",
         roomUrl: "http://invalid",
         socialShareProviders: []
@@ -617,7 +609,6 @@ describe("loop.store.ActiveRoomStore", function () {
 
       var state = store.getStoreState();
       expect(state.roomName).eql(fakeRoomInfo.roomName);
-      expect(state.roomOwner).eql(fakeRoomInfo.roomOwner);
       expect(state.roomToken).eql(fakeRoomInfo.roomToken);
       expect(state.roomUrl).eql(fakeRoomInfo.roomUrl);
       expect(state.socialShareProviders).eql([]);
@@ -630,7 +621,6 @@ describe("loop.store.ActiveRoomStore", function () {
     beforeEach(function() {
       fakeRoomInfo = {
         roomName: "Its a room",
-        roomOwner: "Me",
         roomUrl: "http://invalid",
         urls: [{
           description: "fake site",
@@ -645,7 +635,6 @@ describe("loop.store.ActiveRoomStore", function () {
 
       var state = store.getStoreState();
       expect(state.roomName).eql(fakeRoomInfo.roomName);
-      expect(state.roomOwner).eql(fakeRoomInfo.roomOwner);
       expect(state.roomUrl).eql(fakeRoomInfo.roomUrl);
       expect(state.roomContextUrls).eql(fakeRoomInfo.urls);
     });
@@ -1513,7 +1502,6 @@ describe("loop.store.ActiveRoomStore", function () {
       beforeEach(function() {
         store.setupRoomInfo(new sharedActions.SetupRoomInfo({
           roomName: "Its a room",
-          roomOwner: "Me",
           roomToken: "fakeToken",
           roomUrl: "http://invalid",
           socialShareProviders: []
@@ -1531,7 +1519,6 @@ describe("loop.store.ActiveRoomStore", function () {
               fake: "url"
             }
           },
-          roomOwner: "you",
           roomUrl: "original"
         };
 
@@ -1542,7 +1529,6 @@ describe("loop.store.ActiveRoomStore", function () {
           new sharedActions.UpdateRoomInfo({
             description: "fakeDescription",
             roomName: fakeRoomData.decryptedContext.roomName,
-            roomOwner: fakeRoomData.roomOwner,
             roomUrl: fakeRoomData.roomUrl,
             urls: {
               fake: "url"
@@ -1559,7 +1545,6 @@ describe("loop.store.ActiveRoomStore", function () {
               fake: "url"
             }
           },
-          roomOwner: "you",
           roomUrl: "original"
         };
 
@@ -1574,7 +1559,6 @@ describe("loop.store.ActiveRoomStore", function () {
         decryptedContext: {
           roomName: "Its a room"
         },
-        roomOwner: "Me",
         roomToken: "fakeToken",
         roomUrl: "http://invalid"
       };
