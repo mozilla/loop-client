@@ -3,6 +3,30 @@ Changelog
 
 This document describes changes between each past release.
 
+TBD
+-------------------
+
+- Bug 1170757 - Enabled eslint dot-location + no-empty rules for Hello
+- Bug 1182079 - Fix intermittent test failure loading the Loop's ui-showcase on debug builds by extending the page load timeout, and improve the failure naming.
+- Bug 1192738 - Drop the old aspect ratio calculation code now that Loop's media layout refactors have been completed.
+- Bug 1193311 - Enable eslint rules for Loop: eqeqeq (for content code).
+- Bug 1178393 - Countdown to zero warnings in standalone test suite.
+- Bug 1193693 - Improve the Analytics filtering of Loop conversation urls.
+- Bug 1194738 - Drop some obsolete pref handling from Loop, and some old room conversation styles.
+- No Bug - correct comment to say 'browser', not 'tab'.
+- Bug 1190442 - Visual refresh for Loop FTU panel.
+- Bug 1184559 - Implement the refreshed design for the conversation toolbar.
+- Bug 1189287 - Update the tooltip strings for the mute and unmute video buttons inside the Hello conversation toolbar.
+- Bug 1197795 - Update Loop's library versions (eslint 1.2.1, sinon 1.16.1).
+- Bug 1193665 - Entering a conversation multiple times from link-clicker UI causes duplicated received text messages.
+- Bug 1197366 - Suppress 404 errors for missing CSS on Loop's conversation window and standalone UI.
+- Bug 1193666 - Fix surrounding colour of context tiles for Loop's text chat views. Also fix the fallback icon for context on desktop.
+- Bug 1184917 - Implement the refreshed design for 'Edit' conversation toolbar button.
+- Bug 1157646 - Stop passing the roomOwner parameter around everywhere in Loop's rooms.
+- Bug 1198421 - 'Welcome to ...' needs a bottom border on the Loop standalone UI.
+- Bug 1126733 - Brief message appears when entering a standalone room that the user is the only person in the room.
+
+
 0.20.0 (2015-08-12)
 -------------------
 
