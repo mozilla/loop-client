@@ -3,7 +3,7 @@ Changelog
 
 This document describes changes between each past release.
 
-0.20.1 (TBD)
+0.20.1 (2015-09-02)
 -------------------
 
 - Bug 1193693 - Improve the Analytics filtering of Loop conversation urls.
@@ -11,6 +11,9 @@ This document describes changes between each past release.
 - Bug 1197366 - Suppress 404 errors for missing CSS on Loop's conversation window and standalone UI.
 - Bug 1193666 - Fix surrounding colour of context tiles for Loop's text chat views. Also fix the fallback icon for context on desktop.
 - Bug 1198421 - 'Welcome to ...' needs a bottom border on the Loop standalone UI.
+- Bug 1186396 - Remove remaining references to JQuery from Loop.
+- Bug 1157646 - Stop passing the roomOwner parameter around everywhere in Loop's rooms.
+- Update L10n
 
 0.20.0 (2015-08-12)
 -------------------
