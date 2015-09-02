@@ -19,6 +19,8 @@ TBD
 - Bug 1197795 - Update Loop's library versions (eslint 1.2.1, sinon 1.16.1).
 - Bug 1184917 - Implement the refreshed design for 'Edit' conversation toolbar button.
 - Bug 1126733 - Brief message appears when entering a standalone room that the user is the only person in the room.
+- No bug - Remove obsolete jshint files from Loop's standalone as Loop now uses eslint
+- Bug 1186396 - Remove remaining references to JQuery from Loop.
 
 0.20.1 (2015-09-02)
 -------------------
