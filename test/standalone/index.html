@@ -53,7 +53,6 @@
   <script src="../../content/shared/js/dispatcher.js"></script>
   <script src="../../content/shared/js/store.js"></script>
   <script src="../../content/shared/js/roomStates.js"></script>
-  <script src="../../content/shared/js/fxOSActiveRoomStore.js"></script>
   <script src="../../content/shared/js/activeRoomStore.js"></script>
   <script src="../../content/shared/js/views.js"></script>
   <script src="../../content/shared/js/textChatStore.js"></script>
@@ -63,7 +62,6 @@
   <script src="../../content/js/standaloneAppStore.js"></script>
   <script src="../../content/js/standaloneClient.js"></script>
   <script src="../../content/js/standaloneMozLoop.js"></script>
-  <script src="../../content/js/fxOSMarketplace.js"></script>
   <script src="../../content/js/standaloneRoomViews.js"></script>
   <script src="../../content/js/standaloneMetricsStore.js"></script>
   <script src="../../content/js/webapp.js"></script>
@@ -84,7 +82,7 @@
 
     describe("Unexpected Warnings Check", function() {
       it("should long only the warnings we expect", function() {
-        chai.expect(caughtWarnings.length).to.eql(10);
+        chai.expect(caughtWarnings.length).to.eql(13);
       });
     });
 
