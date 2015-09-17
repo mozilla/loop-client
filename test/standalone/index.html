@@ -45,7 +45,6 @@
   </script>
   <!-- App scripts -->
   <script src="../../content/shared/js/utils.js"></script>
-  <script src="../../content/shared/js/models.js"></script>
   <script src="../../content/shared/js/mixins.js"></script>
   <script src="../../content/shared/js/websocket.js"></script>
   <script src="../../content/shared/js/actions.js"></script>
@@ -58,21 +57,17 @@
   <script src="../../content/shared/js/textChatStore.js"></script>
   <script src="../../content/shared/js/textChatView.js"></script>
   <script src="../../content/shared/js/otSdkDriver.js"></script>
-  <script src="../../content/js/multiplexGum.js"></script>
   <script src="../../content/js/standaloneAppStore.js"></script>
-  <script src="../../content/js/standaloneClient.js"></script>
   <script src="../../content/js/standaloneMozLoop.js"></script>
   <script src="../../content/js/standaloneRoomViews.js"></script>
   <script src="../../content/js/standaloneMetricsStore.js"></script>
   <script src="../../content/js/webapp.js"></script>
   <!-- Test scripts -->
-  <script src="standalone_client_test.js"></script>
   <script src="standaloneAppStore_test.js"></script>
   <script src="standaloneMozLoop_test.js"></script>
   <script src="standaloneRoomViews_test.js"></script>
   <script src="standaloneMetricsStore_test.js"></script>
   <script src="webapp_test.js"></script>
-  <script src="multiplexGum_test.js"></script>
   <script>
     describe("Uncaught Error Check", function() {
       it("should load the tests without errors", function() {
@@ -82,7 +77,7 @@
 
     describe("Unexpected Warnings Check", function() {
       it("should long only the warnings we expect", function() {
-        chai.expect(caughtWarnings.length).to.eql(13);
+        chai.expect(caughtWarnings.length).to.eql(11);
       });
     });
 
