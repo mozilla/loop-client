@@ -3,6 +3,17 @@ Changelog
 
 This document describes changes between each past release.
 
+0.20.2 (2015-09-29)
+-------------------
+
+- Bug 1205610 - Log the string associated with OT's UNABLE_TO_PUBLISH exception to help understand where it is coming from.
+- Bug 1207575 - Fix reporting of Loop's connection status if a user exits a room and then re-enters it without reloading the room.
+- Bug 1200201 - Remove the code for redirecting to the FxOS client from Loop standalone.
+- Bug 1199213 - Part 1. Remove the old standalone call-url handling code from Loop.
+- Bug 1188509 - Bundle Hello standalone JS for performance.
+- Bug 1208647 - minify OpenTok+lodash for faster Hello standalone load time.
+- Update L10n
+
 0.20.1 (2015-09-02)
 -------------------
 
