@@ -213,7 +213,7 @@ def pullGit(branch):
 
 
 def pushGit(branch):
-    runCommand(['git', 'push', 'origin', branch])
+    runCommand(['git', 'push', '-q', 'origin', branch])
 
 
 def main():
