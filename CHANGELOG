@@ -20,7 +20,37 @@ TBD
 - Bug 1184917 - Implement the refreshed design for 'Edit' conversation toolbar button.
 - Bug 1126733 - Brief message appears when entering a standalone room that the user is the only person in the room.
 - No bug - Remove obsolete jshint files from Loop's standalone as Loop now uses eslint
-- Bug 1186396 - Remove remaining references to JQuery from Loop.
+- Bug 1200201 - Remove the code for redirecting to the FxOS client from Loop standalone
+- Bug 1198841 - Brief message to invite someone to join when joining a room with someone already there
+- Bug 1194622 - Provide indication of loading when waiting for the room list
+- Bug 1201446 - Don't expose websocket reasons to the view code where we have a specific failure detail available.
+- Bug 1198891 - Tab/Window Sharing icon should turn blue when sharing is active.
+- Bug 1202402 - Nothing shown on the standalone UI when a peer exits the room
+- Bug 1184933 - Part 1. Implement the refreshed design for the failure view.
+- Bug 1184933 - Part 2. Add the settings menu onto the failure view.
+- Bug 1203529 - Bad display when starting an audio-only call to a contact.
+- Bug 1196499 - Update Loop empty state for no conversations.
+- Bug 1203850 - Rename Loop's srcVideoObject and related variables/attributes to clarify they are about the media element, not just the video.
+- Bug 1199213 - Part 1. Remove the old standalone call-url handling code from Loop.
+- Bug 1204577 - remove invalid CSS properties from Loop/ Hello source files.
+- Bug 1200689 - Style Hello 'Share' menu consistently with gear icon menu.
+- Bug 1199120 - Overlapping buttons in conversation window
+- Bug 1184940 - Implement the refreshed design for the edit context view.
+- Bug 1184940 - Implement the refreshed design for the edit context view
+- Bug 1205658 - Hello Spinner Blue should match other blue elements in Hello
+- Bug 1199213 - Part 2. Remove the old css relating to standalone call-url handling from Loop.
+- Bug 1199213 - Part 3. More cleanup of conversation related css after call-url code removal.
+- Bug 1205610 - Log the string associated with OT's UNABLE_TO_PUBLISH exception to help understand where it is coming from.
+- Bug 1188771 - Inform users when they can't use the Hello service due to ToS compliance.
+- Bug 1208201 - Simplify setup flows for standalone and desktop in Loop's activeRoomStore.
+- Bug 1207575 - Fix reporting of Loop's connection status if a user exits a room and then re-enters it without reloading the room.
+- Bug 1208515 - The feedback view has the incorrect blue for the Hello icon and button.
+- Bug 1208466 - Part 1. Create a new ToS view for Loop's standalone, ready for integration into the handled-in-Firefox views.
+- Bug 1208466 - Part 2. If an owner of a Loop link clicks their own link and join, make it open the conversation window.
+- Bug 1208466 - Part 3. Fix display when opening room, and make the opened room text non-bold.
+- Bug 1188509 - Bundle Hello standalone JS for performance.
+- Bug 1208647 - minify OpenTok+lodash for faster Hello standalone load time.
+
 
 0.20.1 (2015-09-02)
 -------------------
