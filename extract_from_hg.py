@@ -111,6 +111,10 @@ def updatePathsInTestFile(filename, fileData):
     print "Translating %s" % filename
     return fileData.replace('src="../../standalone/', 'src="../../')
 
+def stripPackageJson(fileData):
+    # This line we don't want - we don't use eslint in loop-client currently
+    # and we don't want to move the source across.
+    return fileData.replace('"eslint-plugin-mozilla": "../../../../testing/eslint-plugin-mozilla",', '')
 
 def writeFile(filename, fileData):
     """
@@ -127,6 +131,8 @@ def writeFile(filename, fileData):
     outFile = open(filename, "w")
     if testFileNeedsUpdatedPaths(filename):
         outFile.write(updatePathsInTestFile(filename, fileData))
+    elif filename == "package.json":
+        outFile.write(stripPackageJson(fileData))
     else:
         outFile.write(fileData)
     outFile.close()
