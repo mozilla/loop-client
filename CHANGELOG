@@ -3,6 +3,13 @@ Changelog
 
 This document describes changes between each past release.
 
+Note to release creators: Please ensure that on master there is always a
+                          "TBD\n---\n\n" section at the start, followed by
+                          the section of the previous release in
+                          "<version> (<date>)\n---\n\n" format. This ensures
+                          that extract_from_hg.py can find where to insert
+                          entries automatically.
+
 TBD
 -------------------
 

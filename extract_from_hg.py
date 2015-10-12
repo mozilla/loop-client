@@ -31,6 +31,7 @@ from mercurial import hg, ui, commands
 # minimal, which doesn't help.
 from git import Repo
 
+CHANGELOG_FILE = "CHANGELOG"
 LATEST_REV_FILE = "last_m_c_import_rev.txt"
 DEFAULT_SOURCE_REPO = "http://hg.mozilla.org/mozilla-central/"
 DEFAULT_SOURCE_CLONE = "../mozilla-central"
@@ -195,15 +196,117 @@ def commitCset(cset):
     runCommand(['git', 'commit', '-m', commitMsg, '--author=' + cset.user(),
                 '--date=' + str(csetDate)])
 
+def formatCommitMessageLine(line):
+    # Now do translations on the line.
+
+    # First, strip off any review flags from the end of line.
+    line = re.sub(r"""
+     \ *         # Match any number of spaces
+     \[*         # Match none or more of `[`, don't worry about `]` - some commit messages do `[r=smith]`
+     rs*         # Match r or rs
+     \=.*        # Match = and the rest of the line.
+    """, "", line, 0, re.VERBOSE)
+
+    # Now change any ': ' to dashes - some people use "Bug 123456: ..."
+    line = re.sub(r": ", " - ", line)
+
+    # Next change any '123456-' to add a space either side of the dash.
+    # Some people do 'Bug 123456-...'.
+    line = re.sub(r"\([0-9]]\)-", r"\1 - ", line)
+
+    # Now replace any commas at the end of the line with dots.
+    line = re.sub(r",$", ".", line)
+
+    # Finally insert '- ' at start of line for changelog formatting.
+    return "- " + line
+
+
+def insertGitChanges(gitRepo, headGitCommit, outFile):
+    proc = subprocess.Popen(
+        ['git', 'log',
+         headGitCommit + ".." + gitRepo.head.object.hexsha,
+         "--decorate=no",
+         "--reverse",
+         "--format=format:%s"],
+        stdout=subprocess.PIPE)
+
+    while True:
+        line = proc.stdout.readline()
+        if line == '':
+            break
+
+        # We shouldn't ever hit this, but just in case...
+        if line.startswith('update latest merged cset file and CHANGELOG'):
+            continue
+
+        outFile.write(formatCommitMessageLine(line) + "\n")
+
+
+def writeChangeLog(gitRepo, headGitCommit):
+    inFile = open(CHANGELOG_FILE, "r")
+    oldLines = inFile.readlines()
+    inFile.close()
+
+    outFile = open(CHANGELOG_FILE, "w")
+    foundTBD = False
+    foundFirstDashes = False
+    outBuffer = []
+
+    continuationIndex = 0
+
+    # Find where to insert the new lines. We hunt down to the first TBD followed
+    # by "---" and then look for the next one. Note that 'i' gets used in the for
+    # statement lower down to finish writing the file.
+    for i in xrange(len(oldLines)):
+        line = oldLines[i]
+        strippedLine = line.rstrip('\n')
+
+        if foundTBD and foundFirstDashes:
+            if line.startswith("---"):
+                # Now we've found the dashes, print the buffer and adjust the index
+                # so that we're ready for later.
+                for bufferLine in outBuffer[:-2]:
+                    outFile.write(bufferLine)
+
+                continuationIndex = i - 2
+                break
+
+            outBuffer.append(line)
+
+        else:
+            if strippedLine == "TBD":
+                foundTBD = True
+            elif foundTBD and line.startswith("---"):
+                foundFirstDashes = True
+
+            outFile.write(line)
+
+    # Now get the git log entries and add them to the file. If this fails, we
+    # still finish writing the CHANGELOG, so as to not leave the repo in a totally
+    # bad state.
+    try:
+        insertGitChanges(gitRepo, headGitCommit, outFile)
+    except Exception, e:
+        print >> sys.stderr, "Running insertGitChanges failed: ", e
+
+    # Finally output the rest of the changelog.
+    for i in xrange(continuationIndex, len(oldLines)):
+        outFile.write(oldLines[i])
+
+    outFile.close()
+
 
 # Outputs to the lastest revision file
-def writeLatestRev(cset):
+def writeLatestRevAndChangeLog(gitRepo, headGitCommit, cset):
+    writeChangeLog(gitRepo, headGitCommit)
+    gitAdd(CHANGELOG_FILE)
+
     outFile = open(LATEST_REV_FILE, "w")
     outFile.write(cset.hex() + "\n")
     outFile.close()
 
     gitAdd(LATEST_REV_FILE)
-    runCommand(['git', 'commit', '-m', 'update latest merged cset file'])
+    runCommand(['git', 'commit', '-m', 'update latest merged cset file and CHANGELOG'])
 
 
 def pullHg(hgRepo, hgUI, sourceURL, sourceBranch):
@@ -253,6 +356,8 @@ def main():
     if args.pull_git:
         pullGit(gitRepo.active_branch.name)
 
+    headGitCommit = gitRepo.head.object.hexsha
+
     # Find out the last revision we checked against
     lastestRevFile = open(LATEST_REV_FILE, "r")
     firstRevText = lastestRevFile.read().strip()
@@ -300,7 +405,7 @@ def main():
 
     # Only bother committing and pushing if we've updated the files.
     if committedFiles:
-        writeLatestRev(lastCset)
+        writeLatestRevAndChangeLog(gitRepo, headGitCommit, lastCset)
 
         if args.push_result:
             pushGit(gitRepo.active_branch.name)
