@@ -44,6 +44,32 @@ TBD
 - Bug 1208466 - Part 1. Create a new ToS view for Loop's standalone, ready for integration into the handled-in-Firefox views.
 - Bug 1208466 - Part 2. If an owner of a Loop link clicks their own link and join, make it open the conversation window.
 - Bug 1208466 - Part 3. Fix display when opening room, and make the opened room text non-bold.
+- Bug 1171962 - introduce telemetry histogram that counts the amount of sessions that exchanged one or more chat messages.
+- Bug 1209078 - Part 2. If a user attempts to open their own room within Firefox when the room is already open, provide a message to inform the user.
+- Bug 1204101 - Fix for Loop settings menu positioning where menu gets cropped from longer text.
+- Bug 1205206 - Move Loop Standalone Terms of Service text from footer to under Join button.
+- Bug 1155923 - Removing moz prefix from RTC interfaces.
+- Bug 1209029 - .settings-menu .icon classes in Loop's panel are obsolete and should be removed.
+- Bug 1193674 - If room context/name is unavailable, the title of the standalone is displayed as "{{roomName}} - Firefox Hello".
+- No bug. Fix Loop's eslint configuration, due to fallout from bug 1203520.
+- Bug 1184924 - Implement the refreshed design for the invitation overlay
+- Bug 1184921 - allow custom buttons to be added to the chatbox titlebar and implement one for Hello that closes the window when clicked.
+- Bug 1210331 - Clean up strings for conversations panel and conversation invite
+- Bug 1204343 - Loop's accept call buttons has different heights and looks strange.
+- Bug 1209592 - Fix Loop's screenshare dropdown being misplaced on large window sizes.
+- Bug 1210513 - Loop's direct calls don't cancel properly if you click the hangup button on the toolbar.
+- Bug 1204345 - Last letter at bottom right can be cut off.
+- Bug 1172662 - ICE failures occuring in Loop conversations should be reported to the user.
+- Bug 1208047 - Close the dropdown menu for sharing on Loop's conversation window as soon as an item is clicked, rather than leaving it open in a potentially confusing state.
+- Bug 1211592 - The Copy Link and Email Link buttons show cursor:default, but the other buttons (Camera,Mic,Share Screen,Settings) show cursor:pointer
+- Bug 1211563 - Invite buttons should be underneath "Invite a friend" text in popped-out view
+- Bug 1212272 - 'make dist' for the Loop standalone doesn't update the css and supplementary files properly.
+- Bug 1209632 - Removing footer from Loop Standalone, moved Logo to mediaLayoutView.
+- Bug 1200693 - Modify aspect ratio so that top and bottom black bars are not seen when waiting alone in the conversation window.
+- Follow-up to bug 1212272 - use the correct cp command.
+- Bug 1212787 - Revert Loop's conversation toolbar button sizes due to bug 1209632 causing a visual regression.
+- Bug 1212083 - Part 1. Remove the direct calls UI from Loop.
+- Bug 1212083 - Part 2. Remove the unused files previously associated with direct calls.
 
 0.20.2 (2015-09-29)
 -------------------
