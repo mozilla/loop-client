@@ -85,6 +85,9 @@ TBD
 - Bug 1213810 - Remove obsolete actions previously associated with direct calls.
 
 - Bug 1213855 - Remove direct call functionality from Loop's backend.
+- Bug 1209686 - Remove Standalone header from Loop.
+
+- Bug 1210774 - Upgrade Loop's use of eslint (to 1.6.x) and eslint-plugin-react (to 3.5.x).
 
 0.20.2 (2015-09-29)
 -------------------
