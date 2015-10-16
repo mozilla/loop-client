@@ -77,6 +77,11 @@ TBD
 - Bug 1212787 - Revert Loop's conversation toolbar button sizes due to bug 1209632 causing a visual regression.
 - Bug 1212083 - Part 1. Remove the direct calls UI from Loop.
 - Bug 1212083 - Part 2. Remove the unused files previously associated with direct calls.
+- Bug 1201308 - Leave / Exit conversation button always present.
+- Bug 1212338 - Move the user's "availability" option to the settings menu as a "turn notifications on/off" in the Loop panel.
+- Bug 1209589 - Collect Google Analytics data for users on IE 10 & 11.
+- Bug 1212340 - Move the Leave feedback option from the conversation window settings menu to the panel settings menu.
+- Bug 1050295 - The extraction script should update the changelog automatically.
 
 0.20.2 (2015-09-29)
 -------------------
