@@ -82,6 +82,9 @@ TBD
 - Bug 1209589 - Collect Google Analytics data for users on IE 10 & 11.
 - Bug 1212340 - Move the Leave feedback option from the conversation window settings menu to the panel settings menu.
 - Bug 1050295 - The extraction script should update the changelog automatically.
+- Bug 1213810 - Remove obsolete actions previously associated with direct calls.
+
+- Bug 1213855 - Remove direct call functionality from Loop's backend.
 
 0.20.2 (2015-09-29)
 -------------------
