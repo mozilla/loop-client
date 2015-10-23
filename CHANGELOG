@@ -104,6 +104,11 @@ TBD
 - Bug 1215455 - eslint react/jsx-curly-spacing
 
 - Bug 1215455 - eslint consistent-return
+- Bug 1217335 - Room context is no longer shown when loading the Loop standalone UI.
+
+- Bug 1217369 - "Welcome to ..." has extra padding on Loop's standalone UI making it feel strange.
+
+- Bug 1213848 - Change the Loop panel display when a user enters their own room to stop them entering other rooms
 
 0.20.2 (2015-09-29)
 -------------------
