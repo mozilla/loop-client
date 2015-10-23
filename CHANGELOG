@@ -89,6 +89,21 @@ TBD
 
 - Bug 1210774 - Upgrade Loop's use of eslint (to 1.6.x) and eslint-plugin-react (to 3.5.x).
 - Bug 1212079 - Removed contact scripts from index.
+- Bug 1215455 - eslint no-multi-spaces
+
+- Bug 1215455 - eslint object-curly-spacing
+
+- Bug 1215455 - eslint space-after-keywords
+
+- Bug 1215455 - eslint space-before-blocks
+
+- Bug 1215455 - eslint space-before-function-paren
+
+- Bug 1215455 - eslint space-in-parens
+
+- Bug 1215455 - eslint react/jsx-curly-spacing
+
+- Bug 1215455 - eslint consistent-return
 
 0.20.2 (2015-09-29)
 -------------------
