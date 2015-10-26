@@ -3,7 +3,7 @@ Changelog
 
 This document describes changes between each past release.
 
-TBD
+0.21.0 (2015-10-26)
 -------------------
 
 - Bug 1170757 - Enabled eslint dot-location + no-empty rules for Hello
@@ -70,6 +70,15 @@ TBD
 - Bug 1212787 - Revert Loop's conversation toolbar button sizes due to bug 1209632 causing a visual regression.
 - Bug 1212083 - Part 1. Remove the direct calls UI from Loop.
 - Bug 1212083 - Part 2. Remove the unused files previously associated with direct calls.
+- Bug 1201308 - Leave / Exit conversation button always present.
+- Bug 1209589 - Collect Google Analytics data for users on IE 10 & 11.
+- Bug 1209686 - Remove Standalone header from Loop.
+- Bug 1217335 - Room context is no longer shown when loading the Loop standalone UI.
+- Bug 1217369 - "Welcome to ..." has extra padding on Loop's standalone UI making it feel strange.
+- Bug 1213848 - Change the Loop panel display when a user enters their own room to stop them entering other rooms
+- Bug 1218405 - Change Loop's standalone background for the visual refresh/latest designs
+- Bug 1218450 - The width of the tile shown on Loop's standalone when you're the only person in the room is wrong, giving a bad layout.
+- Update L10n
 
 0.20.2 (2015-09-29)
 -------------------
