@@ -109,6 +109,11 @@ TBD
 - Bug 1217369 - "Welcome to ..." has extra padding on Loop's standalone UI making it feel strange.
 
 - Bug 1213848 - Change the Loop panel display when a user enters their own room to stop them entering other rooms
+- Bug 1213336-Update Hello standalone npm version.
+
+- Bug 1205684 - Video Window height pushes down context and covers a part of it
+
+- Backed out changeset 79a231b4477d (bug 1205684) for Mn loop bustage mozilla-central hg revision - dd5df13fccbdbca6a45ad11120a9485dc3272512
 
 0.20.2 (2015-09-29)
 -------------------
