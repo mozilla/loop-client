@@ -12,6 +12,25 @@ Note to release creators: Please ensure that on master there is always a
 
 TBD
 -------------------
+- Bug 1212338 - Move the user's "availability" option to the settings menu as a "turn notifications on/off" in the Loop panel.
+- Bug 1212340 - Move the Leave feedback option from the conversation window settings menu to the panel settings menu.
+- Bug 1050295 - The extraction script should update the changelog automatically.
+- Bug 1213810 - Remove obsolete actions previously associated with direct calls.
+- Bug 1213855 - Remove direct call functionality from Loop's backend.
+- Bug 1210774 - Upgrade Loop's use of eslint (to 1.6.x) and eslint-plugin-react (to 3.5.x).
+- Bug 1212079 - Removed contact scripts from index.
+- Bug 1215455 - eslint no-multi-spaces
+- Bug 1215455 - eslint object-curly-spacing
+- Bug 1215455 - eslint space-after-keywords
+- Bug 1215455 - eslint space-before-blocks
+- Bug 1215455 - eslint space-before-function-paren
+- Bug 1215455 - eslint space-in-parens
+- Bug 1215455 - eslint react/jsx-curly-spacing
+- Bug 1215455 - eslint consistent-return
+- Bug 1213336 - Update Hello standalone npm version.
+
+0.21.0 (2015-10-26)
+-------------------
 
 - Bug 1170757 - Enabled eslint dot-location + no-empty rules for Hello
 - Bug 1182079 - Fix intermittent test failure loading the Loop's ui-showcase on debug builds by extending the page load timeout, and improve the failure naming.
@@ -78,27 +97,14 @@ TBD
 - Bug 1212083 - Part 1. Remove the direct calls UI from Loop.
 - Bug 1212083 - Part 2. Remove the unused files previously associated with direct calls.
 - Bug 1201308 - Leave / Exit conversation button always present.
-- Bug 1212338 - Move the user's "availability" option to the settings menu as a "turn notifications on/off" in the Loop panel.
 - Bug 1209589 - Collect Google Analytics data for users on IE 10 & 11.
-- Bug 1212340 - Move the Leave feedback option from the conversation window settings menu to the panel settings menu.
-- Bug 1050295 - The extraction script should update the changelog automatically.
-- Bug 1213810 - Remove obsolete actions previously associated with direct calls.
-- Bug 1213855 - Remove direct call functionality from Loop's backend.
 - Bug 1209686 - Remove Standalone header from Loop.
-- Bug 1210774 - Upgrade Loop's use of eslint (to 1.6.x) and eslint-plugin-react (to 3.5.x).
-- Bug 1212079 - Removed contact scripts from index.
-- Bug 1215455 - eslint no-multi-spaces
-- Bug 1215455 - eslint object-curly-spacing
-- Bug 1215455 - eslint space-after-keywords
-- Bug 1215455 - eslint space-before-blocks
-- Bug 1215455 - eslint space-before-function-paren
-- Bug 1215455 - eslint space-in-parens
-- Bug 1215455 - eslint react/jsx-curly-spacing
-- Bug 1215455 - eslint consistent-return
 - Bug 1217335 - Room context is no longer shown when loading the Loop standalone UI.
 - Bug 1217369 - "Welcome to ..." has extra padding on Loop's standalone UI making it feel strange.
 - Bug 1213848 - Change the Loop panel display when a user enters their own room to stop them entering other rooms
-- Bug 1213336-Update Hello standalone npm version.
+- Bug 1218405 - Change Loop's standalone background for the visual refresh/latest designs
+- Bug 1218450 - The width of the tile shown on Loop's standalone when you're the only person in the room is wrong, giving a bad layout.
+- Update L10n
 
 0.20.2 (2015-09-29)
 -------------------
