@@ -33,6 +33,7 @@ TBD
 - Bug 1216551 - Fix an issue with Loop's unit tests failing when no devices are installed, due to bad stubbing.
 
 - Bug 1218450 - The width of the tile shown on Loop's standalone when you're the only person in the room is wrong, giving a bad layout.
+- Bug 1205684 - Video Window height pushes down context and covers a part of it.
 
 0.21.0 (2015-10-26)
 -------------------
