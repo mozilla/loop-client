@@ -28,6 +28,11 @@ TBD
 - Bug 1215455 - eslint react/jsx-curly-spacing
 - Bug 1215455 - eslint consistent-return
 - Bug 1213336 - Update Hello standalone npm version.
+- Bug 1218405 - Change Loop's standalone background for the visual refresh/latest designs.
+
+- Bug 1216551 - Fix an issue with Loop's unit tests failing when no devices are installed, due to bad stubbing.
+
+- Bug 1218450 - The width of the tile shown on Loop's standalone when you're the only person in the room is wrong, giving a bad layout.
 
 0.21.0 (2015-10-26)
 -------------------
