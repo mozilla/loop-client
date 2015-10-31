@@ -37,6 +37,11 @@ TBD
 - Bug 1214582 - Adjust how room titles are displayed/managed in Loop's UI.
 - Bug 1212357 - Update the layout of the rooms list items for user journey.
 - Bug 1215322 - remove need for CSP unsafe-eval in Hello.
+- Bug 1210865 - Update OpenTok library to version 2.6.8.
+
+- Backout bug 1210865 / changeset dcd113d0102e due to apparent bustage of Loop's setup system for data channels. mozilla-central hg revision - b3a64c90e34f10601f2cae91afc2294adc6fb10a
+
+- Bug 1215593 - Relayout the room title and context tile in text chat.
 
 0.21.0 (2015-10-26)
 -------------------
