@@ -42,6 +42,7 @@ TBD
 - Backout bug 1210865 / changeset dcd113d0102e due to apparent bustage of Loop's setup system for data channels. mozilla-central hg revision - b3a64c90e34f10601f2cae91afc2294adc6fb10a
 
 - Bug 1215593 - Relayout the room title and context tile in text chat.
+- Bug 1214590 - Remove Loop default Room name.
 
 0.21.0 (2015-10-26)
 -------------------
