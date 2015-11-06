@@ -45,6 +45,7 @@ TBD
 - Bug 1214590 - Remove Loop default Room name.
 - Bug 1213906-Change email invitation to fit new user journey.
 - Bug 1215487 - Fix Mozilla logo in Chrome for Loop Standalone
+- Bug 1220878-switch Hello from React.addons.classSet to classnames package.
 
 0.21.0 (2015-10-26)
 -------------------
