@@ -28,25 +28,17 @@ TBD
 - Bug 1215455 - eslint react/jsx-curly-spacing
 - Bug 1215455 - eslint consistent-return
 - Bug 1213336 - Update Hello standalone npm version.
-- Bug 1218405 - Change Loop's standalone background for the visual refresh/latest designs.
-
 - Bug 1216551 - Fix an issue with Loop's unit tests failing when no devices are installed, due to bad stubbing.
-
-- Bug 1218450 - The width of the tile shown on Loop's standalone when you're the only person in the room is wrong, giving a bad layout.
 - Bug 1205684 - Video Window height pushes down context and covers a part of it.
 - Bug 1214582 - Adjust how room titles are displayed/managed in Loop's UI.
 - Bug 1212357 - Update the layout of the rooms list items for user journey.
 - Bug 1215322 - remove need for CSP unsafe-eval in Hello.
-- Bug 1210865 - Update OpenTok library to version 2.6.8.
-
-- Backout bug 1210865 / changeset dcd113d0102e due to apparent bustage of Loop's setup system for data channels. mozilla-central hg revision - b3a64c90e34f10601f2cae91afc2294adc6fb10a
-
 - Bug 1215593 - Relayout the room title and context tile in text chat.
 - Bug 1214590 - Remove Loop default Room name.
-- Bug 1213906-Change email invitation to fit new user journey.
+- Bug 1213906 - Change email invitation to fit new user journey.
 - Bug 1215487 - Fix Mozilla logo in Chrome for Loop Standalone
-- Bug 1220878-switch Hello from React.addons.classSet to classnames package.
-- Bug 1147167-Upgrade React in Hello to 0.13.3.
+- Bug 1220878 - switch Hello from React.addons.classSet to classnames package.
+- Bug 1147167 - Upgrade React in Hello to 0.13.3.
 
 0.21.0 (2015-10-26)
 -------------------
