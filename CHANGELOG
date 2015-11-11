@@ -39,6 +39,11 @@ TBD
 - Bug 1215487 - Fix Mozilla logo in Chrome for Loop Standalone
 - Bug 1220878 - switch Hello from React.addons.classSet to classnames package.
 - Bug 1147167 - Upgrade React in Hello to 0.13.3.
+- Bug 1210865 - Update OpenTok library to version 2.6.8.
+
+- Bug 1210865 - Change how Loop's data channels are setup to cope with the newer SDK that doesn't allow setting them up until subscription is complete.
+
+- Bug 1223351 - Store a metrics event on the loop server if the data channel setup fails.
 
 0.21.0 (2015-10-26)
 -------------------
