@@ -44,6 +44,7 @@ TBD
 - Bug 1210865 - Change how Loop's data channels are setup to cope with the newer SDK that doesn't allow setting them up until subscription is complete.
 
 - Bug 1223351 - Store a metrics event on the loop server if the data channel setup fails.
+- Bug 1222034 - [LinkClicker] Letterbox should be grey when sharing tabs.
 
 0.21.0 (2015-10-26)
 -------------------
