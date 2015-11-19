@@ -45,6 +45,13 @@ TBD
 
 - Bug 1223351 - Store a metrics event on the loop server if the data channel setup fails.
 - Bug 1222034 - [LinkClicker] Letterbox should be grey when sharing tabs.
+- Bug 1048850 - Part 1 - add a client part that can be used to request data from the Loop API or subscribe to incoming push messages.
+
+- Bug 1048850 - Part 3 - transition from the navigator.mozLoop API to the RemotePageManager API.
+
+- Bug 1048850 - Part 4 - update mocha tests and karma runs to not rely on mozLoop anymore.
+
+- Bug 1048850 - Part 5 - ui-showcase adjustments to remove its dependency on navigator.mozLoop.
 
 0.21.0 (2015-10-26)
 -------------------
