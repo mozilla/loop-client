@@ -52,6 +52,7 @@ TBD
 - Bug 1048850 - Part 4 - update mocha tests and karma runs to not rely on mozLoop anymore.
 
 - Bug 1048850 - Part 5 - ui-showcase adjustments to remove its dependency on navigator.mozLoop.
+- No bug - Array.slice not supported by Chrome, which the link clicker doesn't like. Use Array.prototype.slice instead.
 
 0.21.0 (2015-10-26)
 -------------------
