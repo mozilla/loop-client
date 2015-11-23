@@ -12,6 +12,19 @@ Note to release creators: Please ensure that on master there is always a
 
 TBD
 -------------------
+
+- Bug 1205684 - Video Window height pushes down context and covers a part of it.
+- Bug 1215593 - Relayout the room title and context tile in text chat.
+- Bug 1222034 - [LinkClicker] Letterbox should be grey when sharing tabs.
+- Bug 1048850 - Part 1 - add a client part that can be used to request data from the Loop API or subscribe to incoming push messages.
+- Bug 1048850 - Part 3 - transition from the navigator.mozLoop API to the RemotePageManager API.
+- Bug 1048850 - Part 4 - update mocha tests and karma runs to not rely on mozLoop anymore.
+- Bug 1048850 - Part 5 - ui-showcase adjustments to remove its dependency on navigator.mozLoop.
+- No bug - Array.slice not supported by Chrome, which the link clicker doesn't like. Use Array.prototype.slice instead.
+
+0.22.0 (2015-11-10)
+-------------------
+
 - Bug 1212338 - Move the user's "availability" option to the settings menu as a "turn notifications on/off" in the Loop panel.
 - Bug 1212340 - Move the Leave feedback option from the conversation window settings menu to the panel settings menu.
 - Bug 1050295 - The extraction script should update the changelog automatically.
@@ -29,30 +42,17 @@ TBD
 - Bug 1215455 - eslint consistent-return
 - Bug 1213336 - Update Hello standalone npm version.
 - Bug 1216551 - Fix an issue with Loop's unit tests failing when no devices are installed, due to bad stubbing.
-- Bug 1205684 - Video Window height pushes down context and covers a part of it.
 - Bug 1214582 - Adjust how room titles are displayed/managed in Loop's UI.
 - Bug 1212357 - Update the layout of the rooms list items for user journey.
 - Bug 1215322 - remove need for CSP unsafe-eval in Hello.
-- Bug 1215593 - Relayout the room title and context tile in text chat.
 - Bug 1214590 - Remove Loop default Room name.
 - Bug 1213906 - Change email invitation to fit new user journey.
 - Bug 1215487 - Fix Mozilla logo in Chrome for Loop Standalone
 - Bug 1220878 - switch Hello from React.addons.classSet to classnames package.
 - Bug 1147167 - Upgrade React in Hello to 0.13.3.
 - Bug 1210865 - Update OpenTok library to version 2.6.8.
-
 - Bug 1210865 - Change how Loop's data channels are setup to cope with the newer SDK that doesn't allow setting them up until subscription is complete.
-
 - Bug 1223351 - Store a metrics event on the loop server if the data channel setup fails.
-- Bug 1222034 - [LinkClicker] Letterbox should be grey when sharing tabs.
-- Bug 1048850 - Part 1 - add a client part that can be used to request data from the Loop API or subscribe to incoming push messages.
-
-- Bug 1048850 - Part 3 - transition from the navigator.mozLoop API to the RemotePageManager API.
-
-- Bug 1048850 - Part 4 - update mocha tests and karma runs to not rely on mozLoop anymore.
-
-- Bug 1048850 - Part 5 - ui-showcase adjustments to remove its dependency on navigator.mozLoop.
-- No bug - Array.slice not supported by Chrome, which the link clicker doesn't like. Use Array.prototype.slice instead.
 
 0.21.0 (2015-10-26)
 -------------------
