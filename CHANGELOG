@@ -22,6 +22,7 @@ TBD
 - Bug 1048850 - Part 5 - ui-showcase adjustments to remove its dependency on navigator.mozLoop.
 - No bug - Array.slice not supported by Chrome, which the link clicker doesn't like. Use Array.prototype.slice instead.
 - Bug 1227109. Tidy loop conversation window styles, remove temporarily work arounds that are no longer required and fix layout of standalone UI when in narrow views.
+- Bug 1225652 - Loop's unit tests should check for uncaught errors as well as uncaught warnings.
 
 0.22.0 (2015-11-10)
 -------------------
