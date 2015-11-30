@@ -24,8 +24,8 @@ TBD
 - Bug 1227109. Tidy loop conversation window styles, remove temporarily work arounds that are no longer required and fix layout of standalone UI when in narrow views.
 - Bug 1225652 - Loop's unit tests should check for uncaught errors as well as uncaught warnings.
 - Bug 1214214 - Update style of sharing notifications bar, and make it persistent.
-
 - Bug 1228053.  syncThenable in loop test code should have catch(), since some of the tests assume that Promise instances have a catch() method.
+- Bug 1227885 - Improve stubbing of audio requests to avoid intermittent console warnings and also improve caught errors output.
 
 0.22.0 (2015-11-10)
 -------------------
