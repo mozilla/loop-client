@@ -40,24 +40,24 @@ DEFAULT_SOURCE_BRANCH = "default"
 
 # Is this interesting to Loop?
 def interestingFilename(filename):
-    return (filename.startswith("browser/components/loop/standalone") or
-            filename.startswith("browser/components/loop/content/shared") or
-            filename.startswith("browser/components/loop/test/standalone") or
-            filename.startswith("browser/components/loop/test/shared"))
+    return (filename.startswith("browser/extensions/loop/standalone") or
+            filename.startswith("browser/extensions/loop/content/shared") or
+            filename.startswith("browser/extensions/loop/test/standalone") or
+            filename.startswith("browser/extensions/loop/test/shared"))
 
 
 def isIndexFile(filename):
-    return filename == "browser/components/loop/standalone/content/index.html"
+    return filename == "browser/extensions/loop/standalone/content/index.html"
 
 
 # This is how we map files from mozilla-central to loop-client repo
 def updatePathsFor(filename):
-    filename = filename.replace("browser/components/loop/standalone/", "")
-    filename = filename.replace("browser/components/loop/content/shared/",
+    filename = filename.replace("browser/extensions/loop/standalone/", "")
+    filename = filename.replace("browser/extensions/loop/content/shared/",
                                 "content/shared/")
-    filename = filename.replace("browser/components/loop/test/standalone/",
+    filename = filename.replace("browser/extensions/loop/test/standalone/",
                                 "test/standalone/")
-    filename = filename.replace("browser/components/loop/test/shared/",
+    filename = filename.replace("browser/extensions/loop/test/shared/",
                                 "test/shared/")
     return filename
 
