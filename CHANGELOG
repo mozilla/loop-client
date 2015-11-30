@@ -26,6 +26,9 @@ TBD
 - Bug 1214214 - Update style of sharing notifications bar, and make it persistent.
 - Bug 1228053.  syncThenable in loop test code should have catch(), since some of the tests assume that Promise instances have a catch() method.
 - Bug 1227885 - Improve stubbing of audio requests to avoid intermittent console warnings and also improve caught errors output.
+- Bug 1223573 - Part 1. Move loop to browser/extensions/loop.
+
+- Bug 1223573 - Part 5. Update uris and paths for files in Loop's system add-on.
 
 0.22.0 (2015-11-10)
 -------------------
