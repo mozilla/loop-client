@@ -29,6 +29,7 @@ TBD
 - Bug 1223573 - Part 1. Move loop to browser/extensions/loop.
 
 - Bug 1223573 - Part 5. Update uris and paths for files in Loop's system add-on.
+- Bug 1227539 - allow a single argument to be passed to push message subscribers.
 
 0.22.0 (2015-11-10)
 -------------------
