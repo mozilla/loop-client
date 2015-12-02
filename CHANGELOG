@@ -30,6 +30,9 @@ TBD
 
 - Bug 1223573 - Part 5. Update uris and paths for files in Loop's system add-on.
 - Bug 1227539 - allow a single argument to be passed to push message subscribers.
+- Bug 1225832 - partially fix UITour for Loop without navigator.mozLoop present.
+
+- Bug 1229004 - Rename the libs directory to vendor in browser/extensions/loop/standalone/content.
 
 0.22.0 (2015-11-10)
 -------------------
