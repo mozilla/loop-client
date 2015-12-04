@@ -33,6 +33,13 @@ TBD
 - Bug 1225832 - partially fix UITour for Loop without navigator.mozLoop present.
 
 - Bug 1229004 - Rename the libs directory to vendor in browser/extensions/loop/standalone/content.
+- Bug 1214215 - Part 1 - start sharing browser tabs when owner joins the room.
+
+- Bug 1214215 - Part 2 - remove screen sharing controls entirely from the conversation window.
+
+- Bug 1230088 - Update Loop's use of eslint and eslint-plugin-react, fix warnings in latest versions and add a few more rules.
+
+- Bug 1230147 - Loop is attempting to load OpenTok SDK's configs from the wrong places.
 
 0.22.0 (2015-11-10)
 -------------------
