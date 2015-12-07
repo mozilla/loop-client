@@ -40,6 +40,9 @@ TBD
 - Bug 1230088 - Update Loop's use of eslint and eslint-plugin-react, fix warnings in latest versions and add a few more rules.
 
 - Bug 1230147 - Loop is attempting to load OpenTok SDK's configs from the wrong places.
+- Bug 1227105 - Add an onerror handler for Get requests in standaloneMozLoop so that issues contacting the server are correctly reported to the user.
+
+- Bug 1227105 - Add cryptoKey to storeState for use in retry action and fix for TypeError in standaloneRoomViews to make retrying work better in more instances.
 
 0.22.0 (2015-11-10)
 -------------------
