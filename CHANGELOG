@@ -45,6 +45,7 @@ TBD
 - Bug 1227105 - Add cryptoKey to storeState for use in retry action and fix for TypeError in standaloneRoomViews to make retrying work better in more instances.
 - Bug 1206683 - Enable eslint rule for no unused variables for Loop.
 - Bug 1215570 - Update the rooms context whenever the domain/tab changes whilst tab sharing.
+- Bug 1219158 - FTU panel visual UI update.
 
 0.22.0 (2015-11-10)
 -------------------
