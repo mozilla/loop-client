@@ -46,6 +46,11 @@ TBD
 - Bug 1206683 - Enable eslint rule for no unused variables for Loop.
 - Bug 1215570 - Update the rooms context whenever the domain/tab changes whilst tab sharing.
 - Bug 1219158 - FTU panel visual UI update.
+- Bug 1227539 - Part 1 - close a chat window properly, including stopping all sharing and leaving the room.
+
+- Bug 1227539 - Part 2 - implement the new HangupNow action on standalone too so that leaving a room will still work.
+
+- Backed out 2 changesets (bug 1227539) for Win 7 M(bc4) and likely Win XP opt M(bc6) failures.
 
 0.22.0 (2015-11-10)
 -------------------
