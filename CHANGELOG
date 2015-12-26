@@ -51,6 +51,15 @@ TBD
 - Bug 1227539 - Part 2 - implement the new HangupNow action on standalone too so that leaving a room will still work.
 
 - Backed out 2 changesets (bug 1227539) for Win 7 M(bc4) and likely Win XP opt M(bc6) failures.
+- Bug 1227539 - Part 1 - close a chat window properly, including stopping all sharing and leaving the room.
+
+- Bug 1227539 - Part 2 - implement the new HangupNow action on standalone too so that leaving a room will still work.
+
+- Backed out 2 changesets (bug 1227539) for win pgo bc6 failures in browser_mozLoop_chat.js
+
+- Bug 1227539 - Part 1 - close a chat window properly, including stopping all sharing and leaving the room.
+
+- Bug 1227539 - Part 2 - implement the new HangupNow action on standalone too so that leaving a room will still work.
 
 0.22.0 (2015-11-10)
 -------------------
