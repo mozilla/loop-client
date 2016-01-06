@@ -60,6 +60,7 @@ TBD
 - Bug 1227539 - Part 1 - close a chat window properly, including stopping all sharing and leaving the room.
 
 - Bug 1227539 - Part 2 - implement the new HangupNow action on standalone too so that leaving a room will still work.
+- Bug 1178304 - Facebook share button in conversation when waiting alone.
 
 0.22.0 (2015-11-10)
 -------------------
