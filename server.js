@@ -58,6 +58,7 @@ function getConfigFile(req, res) {
   ].join("\n"));
 }
 
+app.get("/config.js", getConfigFile);
 app.get("/content/config.js", getConfigFile);
 app.get("/content/c/config.js", getConfigFile);
 
@@ -80,6 +81,8 @@ app.use("/standalone/content", express.static(path.join(__dirname, "content")));
 // does what we need for running in the github loop-client context, the second one
 // handles running in the hg repo under mozilla-central and is used so that the shared
 // files are in the right location.
+app.use("/", express.static(path.join(__dirname, standaloneContentDir)));
+app.use("/", express.static(path.join(__dirname, "..", "content")));
 app.use("/content", express.static(path.join(__dirname, standaloneContentDir)));
 app.use("/content", express.static(path.join(__dirname, "..", "content")));
 // These two are based on the above, but handle call urls, that have a /c/ in them.
@@ -103,6 +106,7 @@ function serveIndex(req, res) {
   return res.sendFile(path.join(__dirname, standaloneContentDir, "index.html"));
 }
 
+app.get(/^\/[\w\-]+$/, serveIndex);
 app.get(/^\/content\/[\w\-]+$/, serveIndex);
 app.get(/^\/content\/c\/[\w\-]+$/, serveIndex);
 
