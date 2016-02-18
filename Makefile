@@ -43,6 +43,9 @@ distserver: remove_old_config dist
 test:
 	@echo "Not implemented yet."
 
+runserver_nowatch: remove_old_config
+	node server.js
+
 runserver: remove_old_config
 	node server.js
 
